@@ -17,6 +17,15 @@ This repository provides Jupyter notebooks and SageMath code that reproduce the 
 - **PDF**: [arXiv PDF](https://arxiv.org/pdf/2403.14920)
 - **Authors**: Miranda C. N. Cheng, Ioana Coman, Piotr Kucharski, Davide Passaro, Gabriele Sgroi
 
+## Repository Structure
+
+This repository is organized as follows:
+
+- **`notebooks/`** - Contains all the computational code, including Jupyter notebooks and SageMath files that reproduce the examples from the paper
+- **`documentation/`** - Contains detailed documentation for the code and mathematical functions
+
+To access the documentation, open `documentation/index.html` in your web browser.
+
 ## Prerequisites
 
 ### 1. SageMath
