@@ -1,0 +1,338 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Example 5.3.3 &mdash; 3D Modularity Revisited 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=71331e4b" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Example 5.4" href="example54.html" />
+    <link rel="prev" title="Example 5.3.2" href="example532.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            3D Modularity Revisited
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../theorems.html">Theorems and Conjectures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../functions.html">3D Modularity Revisited Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="example511.html">Example 5.1.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example512.html">Example 5.1.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example513.html">Example 5.1.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example521.html">Example 5.2.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example522.html">Example 5.2.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example531.html">Example 5.3.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example532.html">Example 5.3.2</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Example 5.3.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example54.html">Example 5.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example551.html">Example 5.5.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example552.html">Example 5.5.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example553.html">Example 5.5.3</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">3D Modularity Revisited</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../examples.html">Examples</a></li>
+      <li class="breadcrumb-item active">Example 5.3.3</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/notebooks/example533.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Example-5.3.3">
+<h1>Example 5.3.3<a class="headerlink" href="#Example-5.3.3" title="Link to this heading"></a></h1>
+<p>In this notebook we demonstrate the computation of the <img class="math" src="../_images/math/b5a0a89920c819ae7066ef509542e9e168e74ae9.png" alt="\hat{Z}"/> invariant through knot surgery. In this example we will compute <img class="math" src="../_images/math/07c8cc2f44b70e742434e428da238fecafd073c0.png" alt="\pm 1"/> surgery on the left handed trefoil which will lead to expressions for the <img class="math" src="../_images/math/b5a0a89920c819ae7066ef509542e9e168e74ae9.png" alt="\hat{Z}"/> invariants for <img class="math" src="../_images/math/f9acd92a434af1b9ed647c4abf6431cc7098f961.png" alt="\mp \Sigma\left(2,3,7\right)"/>.</p>
+<p>Finally, we will match the expressions we obtain with the optimal mock Jacobi theta functions transforming in the same Weil representation <img class="math" src="../_images/math/09c21b8dc15e74e8ebcea1b6e4afa44a94d0f0b6.png" alt="m+K=42+6,14,21"/>.</p>
+<p>Following equation (2.22) of [1] we have</p>
+<div class="math">
+<p><img src="../_images/math/3285a753969530dbd2f7145f96e8b761497d8ce4.png" alt="\hat{Z}_{b}(S_{\pm 1}^{3}(\mathbb{3}_1^{l/r});W_{\nu};\tau)\sim\\
+\left(a_{-1}(\mathbb{3}_1^{l/r};q)\mathcal{L}_{\pm 1}^{(b+\nu)}\left[x^{{\nu\over 2}}  +x^{{\nu\over 2}-1}+ \dots+   x^{-{\nu\over 2}}\right] +\right. \\
+\left.\sum_{m=1}^{\infty} \mathcal{L}_{\pm 1}^{(b+\nu)}\left[\left(x^{{\nu\over 2}}  +x^{{\nu\over 2}-1}+ \dots+   x^{-{\nu\over 2}}       \right)\frac{a_{-m-1}(\mathbb{3}_1^l;q)}{\prod_{j=1}^{m}(x+x^{-1}-q^{j}-q^{-j})}\right]\right)"/></p>
+</div><p>which we will apply on a case per case basis in order to compute the invariants.</p>
+<p>In case where no defects are inserted and when <img class="math" src="../_images/math/9adbe70506d1a5bcee65de915cbf9ec7bbaabbbe.png" alt="b=b_0"/> the trivial spin-<img class="math" src="../_images/math/d520a12f1579170834c32ad5f656de081bbb36fe.png" alt="c"/> structure, this simplifies to</p>
+<div class="math">
+<p><img src="../_images/math/49865ee6a1995c5480867e45595cbd918fed7cb0.png" alt="\hat{Z}_{b_0}(S_{\pm 1}^{3}(\mathbb{3}_1^{l/r});\tau)\sim\\\left(a_{-1}(\mathbb{3}_1^{l/r};q) \mathcal{L}_{\pm 1}^{(0)}\left[1\right]+ \sum_{m=1}^{\infty} a_{-m-1}(\mathbb{3}_1^{l/r};q)\mathcal{L}_{\pm 1}^{(0)}\left[\frac{1}{\prod_{j=1}^{m}(x+x^{-1}-q^{j}-q^{-j})}\right]\right)"/></p>
+</div><p>which we can expand using equation (2.16)</p>
+<div class="math">
+<p><img src="../_images/math/6a86cccf17780cd6cec908b23aca2fcb886f2eee.png" alt="\mathcal{L}_{-1}^{(0)}\left[\frac{1}{\prod_{j=1}^{n}(x+x^{-1}-q^{j}-q^{-j})}\right] = \frac{q^{n^2}}{\left(q^{n+1};q\right)_{n}}"/></p>
+</div><p>for <img class="math" src="../_images/math/bb3bcf4d88dfa961f520a0d0cea612b738596d66.png" alt="-1"/> surgery and</p>
+<div class="math">
+<p><img src="../_images/math/cc4423b4ab7d039eeb827c96df506b55af178c10.png" alt="\mathcal{L}_{+1}^{(0)}\left[\frac{1}{\prod_{j=1}^{n}(x+x^{-1}-q^{j}-q^{-j})}\right] = (-1)^{n}\frac{q^{\frac{n(n+1)}{2}}}{\left(q^{n+1};q\right)_{n}}"/></p>
+</div><p>for <img class="math" src="../_images/math/3297c822ba1a7cf7852095b144370d3abc0991cb.png" alt="+1"/> surgery. This leaves us with</p>
+<div class="math">
+<p><img src="../_images/math/697c447ecfd243b1fc074f44d4b2f11ff8e50698.png" alt="\hat{Z}_{b_0}(S_{-1}^{3}(\mathbb{3}_1^r);\tau)\sim\\ \left(a_{-1}(\mathbb{3}_1^r;q)P_{0}^{1,0}(q) + \sum_{m=1}^{\infty} a_{-m-1}(\mathbb{3}_1^r;q)\frac{q^{n^{2}}}{\left(q^{m+1};q\right)_{m}}P_{m}^{1,0}(q)\right)~."/></p>
+</div><p>and</p>
+<div class="math">
+<p><img src="../_images/math/56f6406c68bd68ab7319ac6f0fa573ae1f8f0d63.png" alt="\hat{Z}_{b_0}(S_{+1}^{3}(\mathbb{3}_1^l);\tau)\sim\\ \left(a_{-1}(\mathbb{3}_1^l;q)P_{0}^{1,0}(q) + \sum_{m=1}^{\infty} a_{-m-1}(\mathbb{3}_1^l;q)\frac{(-1)^{m}q^{\frac{m(m+1)}{2}}}{\left(q^{m+1};q\right)_{m}}P_{m}^{1,0}(q)\right)~."/></p>
+</div><div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sage.combinat.q_analogues</span><span class="w"> </span><span class="kn">import</span> <span class="n">q_pochhammer</span>
+<span class="n">load</span><span class="p">(</span><span class="s1">&#39;3d_modularity_revisited.sage&#39;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">habiro_3l</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+   <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">m</span><span class="o">*</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">m</span><span class="o">*</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">habiro_3r</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+   <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">m</span><span class="o">*</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">m</span><span class="o">*</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">zhat_surg</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
+    <span class="n">zhat_surg</span> <span class="o">+=</span> <span class="n">habiro_3r</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">q_pochhammer</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Z_0(nu=0,Sigma(2,3,7)): &quot;</span><span class="p">,(</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">q</span><span class="o">*</span><span class="n">zhat_surg</span><span class="p">)</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="mi">20</span><span class="p">))</span>
+
+<span class="n">zhat_surg</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
+    <span class="n">zhat_surg</span> <span class="o">+=</span> <span class="n">habiro_3l</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">q_pochhammer</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Z_0(nu=0,-Sigma(2,3,7)): &quot;</span><span class="p">,(</span><span class="o">-</span><span class="n">q</span><span class="o">*</span><span class="n">zhat_surg</span><span class="p">)</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="mi">20</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Z_0(nu=0,Sigma(2,3,7)):  1 + (-1)*q + (-1)*q^5 + 1*q^10 + (-1)*q^11 + 1*q^18 + Order(q^20)
+Z_0(nu=0,-Sigma(2,3,7)):  1 + 1*q + 1*q^3 + 1*q^4 + 1*q^5 + 2*q^7 + 1*q^8 + 2*q^9 + 1*q^10 + 2*q^11 + 1*q^12 + 3*q^13 + 2*q^14 + 3*q^15 + 3*q^16 + 3*q^17 + 2*q^18 + 5*q^19 + Order(q^20)
+</pre></div></div>
+</div>
+<p>The <img class="math" src="../_images/math/a5fa84b363f309ebc8fe7db38304541732c7de9a.png" alt="q"/>-expansions computed above match the <img class="math" src="../_images/math/b5a0a89920c819ae7066ef509542e9e168e74ae9.png" alt="\hat{Z}"/> invariant for <img class="math" src="../_images/math/ec18f45f50a557bb4639f55df074ecb9dadc0f83.png" alt="\Sigma(2,3,7)"/> and the <img class="math" src="../_images/math/85e2fc91f9d37f20e62f8a2c4eb4b974085739ae.png" alt="F_0"/> order 7 mock theta function of Ramanujan.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyPlumbing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Plumbing</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">Plumbing</span><span class="o">.</span><span class="n">from_Brieskorn</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">7</span><span class="p">])</span>
+<span class="n">b0</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">trivial_spin_c</span><span class="p">([</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Zhat&quot;</span><span class="p">,</span> <span class="n">P</span><span class="o">.</span><span class="n">zhat</span><span class="p">([</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">b0</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+<span class="n">F0</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">q_pochhammer</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;F_0: &quot;</span><span class="p">,</span> <span class="n">F0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Zhat q^(1/2)(1 - 1q^(1) - 1q^(5) + 1q^(10) - 1q^(11) + 1q^(18) + 1q^(30) - 1q^(41) + O(q^42))
+F_0:  1 + 1*q + 1*q^3 + 1*q^4 + 1*q^5 + 2*q^7 + 1*q^8 + 2*q^9 + 1*q^10 + 2*q^11 + 1*q^12 + 3*q^13 + 2*q^14 + 3*q^15 + 3*q^16 + 3*q^17 + 2*q^18 + 5*q^19 + Order(q^20)
+</pre></div></div>
+</div>
+<p>We can compute the invariants in the <img class="math" src="../_images/math/5d7372131a51d2f42856d9e4b1853d6d7d625de6.png" alt="\nu=1"/> case in a similar way, starting from (2.20) we land at</p>
+<div class="math">
+<p><img src="../_images/math/ab0319e0e0f1cb0b9a71d47f40d60cfb5f164185.png" alt="\hat{Z}_{b_0}(S_{\pm 1}^{3}(\mathbb{3}_1^{l/r});W_{1};\tau)\sim\\\left(a_{-1}(\mathbb{3}_1^{l/r};q)\mathcal{L}_{\pm 1}^{(1)}\left[x^{{1\over 2}}  + x^{-{1\over 2}}\right] +
+\sum_{m=1}^{\infty} a_{-m-1}(\mathbb{3}_1^{l/r};q)\mathcal{L}_{\pm 1}^{(1)}\left[\frac{\left(x^{{1\over 2}}  + x^{-{1\over 2}}  \right)}{\prod_{j=1}^{m}(x+x^{-1}-q^{j}-q^{-j})}\right]\right)~,"/></p>
+</div><p>which we expand using equation (2.24)</p>
+<div class="math">
+<p><img src="../_images/math/3357e3a862ab9e231288922795ed2bf6a62e2e0c.png" alt="\mathcal{L}_{-1}^{(1)}\left[\frac{x^{1/2}+x^{-1/2} }{\prod_{j=1}^{n}(x+x^{-1}-q^{j}-q^{-j})}\right]  = \frac{q^{n^2-n+\frac{1}{4}}}{(q^{n};q)_n}"/></p>
+</div><p>and using (2.25)</p>
+<div class="math">
+<p><img src="../_images/math/127c79780fe119cf836420b88eff998816f35e2b.png" alt="\mathcal{L}_{+1}^{(1)}\left[\frac{x^{1/2}+x^{-1/2} }{\prod_{j=1}^{n}(x+x^{-1}-q^{j}-q^{-j})}\right]  =(-1)^n \frac{q^{\frac{n^2+n}{2}-\frac{1}{4}}}{(q^{n};q)_n}"/></p>
+</div><p>leading to</p>
+<div class="math">
+<p><img src="../_images/math/59b8ffdbbaecc5a9caa44079b0323b4d3c79cbb6.png" alt="\hat{Z}_{b_0}(S_{-1}^{3}(\mathbb{3}_1^r);W_{1};\tau)\sim 2a_{-1}(\mathbb{3}_1^r;q)q^{\frac{1}{4}} +
+\sum_{m=1}^{\infty} a_{-m-1}(\mathbb{3}_1^r;q) \frac{q^{m^2-m+\frac{1}{4}}}{(q^{m};q)_m}"/></p>
+</div><p>and</p>
+<div class="math">
+<p><img src="../_images/math/b62ce2b57f3272e975eb9264000e2c0c4c5a2704.png" alt="\hat{Z}_{b_0}(S_{+1}^{3}(\mathbb{3}_1^l);W_{1};\tau)\sim 2a_{-1}(\mathbb{3}_1^l;q)q^{-\frac{1}{4}} +
+\sum_{m=1}^{\infty} a_{-m-1}(\mathbb{3}_1^l;q)(-1)^m \frac{q^{\frac{m^2+m}{2}-\frac{1}{4}}}{(q^{m};q)_m}"/></p>
+</div><div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">zhat_surg</span> <span class="o">=</span> <span class="n">habiro_3r</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
+    <span class="n">zhat_surg</span> <span class="o">+=</span> <span class="n">habiro_3r</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">/</span><span class="n">q_pochhammer</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Z_0(nu=1,Sigma(2,3,7)): &quot;</span><span class="p">,(</span><span class="mi">1</span><span class="o">/</span><span class="n">q</span><span class="o">*</span><span class="n">zhat_surg</span><span class="p">)</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="mi">20</span><span class="p">))</span>
+
+<span class="n">zhat_surg</span> <span class="o">=</span> <span class="n">habiro_3l</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
+    <span class="n">zhat_surg</span> <span class="o">+=</span> <span class="n">habiro_3l</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">q_pochhammer</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Z_0(nu=1,-Sigma(2,3,7)): &quot;</span><span class="p">,(</span><span class="o">-</span><span class="n">q</span><span class="o">*</span><span class="n">zhat_surg</span><span class="p">)</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="mi">20</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Z_0(nu=1,Sigma(2,3,7)):  (-1) + 1*q^2 + 1*q^3 + 1*q^8 + (-1)*q^13 + Order(q^20)
+Z_0(nu=1,-Sigma(2,3,7)):  2 + 1*q + 1*q^2 + 1*q^3 + 2*q^4 + 1*q^5 + 2*q^6 + 2*q^7 + 2*q^8 + 3*q^9 + 3*q^10 + 2*q^11 + 4*q^12 + 4*q^13 + 4*q^14 + 4*q^15 + 6*q^16 + 5*q^17 + 6*q^18 + 6*q^19 + Order(q^20)
+</pre></div></div>
+</div>
+<p>The <img class="math" src="../_images/math/a5fa84b363f309ebc8fe7db38304541732c7de9a.png" alt="q"/>-expansions computed above match the <img class="math" src="../_images/math/b5a0a89920c819ae7066ef509542e9e168e74ae9.png" alt="\hat{Z}"/> invariant for <img class="math" src="../_images/math/ec18f45f50a557bb4639f55df074ecb9dadc0f83.png" alt="\Sigma(2,3,7)"/>, with a wilson line insertion in the highest weight <img class="math" src="../_images/math/5d7372131a51d2f42856d9e4b1853d6d7d625de6.png" alt="\nu=1"/> on the node with weight -7 and the <img class="math" src="../_images/math/de9d2242df028c416bb225f33bf04c4923a06877.png" alt="F_1"/> order 7 mock theta function of Ramanujan.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[94]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Zhat&quot;</span><span class="p">,</span> <span class="n">P</span><span class="o">.</span><span class="n">zhat</span><span class="p">([</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">b0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">wilson</span> <span class="o">=</span> <span class="p">[</span><span class="n">vector</span><span class="p">([</span><span class="mi">0</span><span class="p">])]</span><span class="o">*</span><span class="mi">3</span><span class="o">+</span><span class="p">[</span><span class="n">vector</span><span class="p">([</span><span class="mi">1</span><span class="p">])]))</span>
+<span class="n">F1</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">q_pochhammer</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">q</span><span class="o">**</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">30</span><span class="p">))</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;F_1: &quot;</span><span class="p">,</span> <span class="n">F1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Zhat q^(3/4)(1 - 1q^(2) - 1q^(3) - 1q^(8) + 1q^(13) + 1q^(22) + 1q^(25) + O(q^26))
+F_1:  1*q + 1*q^2 + 1*q^3 + 2*q^4 + 1*q^5 + 2*q^6 + 2*q^7 + 2*q^8 + 3*q^9 + 3*q^10 + 2*q^11 + 4*q^12 + 4*q^13 + 4*q^14 + 4*q^15 + 6*q^16 + 5*q^17 + 6*q^18 + 6*q^19 + Order(q^20)
+</pre></div></div>
+</div>
+<p>In the <img class="math" src="../_images/math/9f73abb0cb592c88a0d0f8e36d1fa8e7470a65d2.png" alt="\nu=2"/> case $$ <span class="math">\hat{Z}</span><em>{b_0}:nbsphinx-math:`left`(S</em>{<span class="math">\pm 1</span>}^{3}(<span class="math">\mathbb{3}</span><em>1^{l/r}); W</em>{2}; <span class="math">\tau</span><span class="math">\right</span>) <span class="math">\sim  `a\_{-1}(:nbsphinx-math:</span>mathbb{3}`<em>1^{l/r};q), :nbsphinx-math:`mathcal{L}`</em>{<span class="math">\pm 1</span>}^{(2)}:nbsphinx-math:<cite>left[ x + 1 + x^{-1} right] `\+ :nbsphinx-math:</cite>sum`<em>{m=1}^{:nbsphinx-math:`infty`}
+a</em>{-m-1}(<span class="math">\mathbb{3}</span><em>1{l/r};q):nbsphinx-math:`mathcal{L}`{:nbsphinx-math:`pm 1`}^{(2)} :nbsphinx-math:`left[left(frac{ q^m + 1 + q^{-m}}{prod_{j=1}^{m} (x + x^{-1} - q^{j} - q^{-j})}+frac{1}{prod_{j=1}^{m-1} (x + x^{-1} - q^{j} - q^{-j})}right)right]`\ :nbsphinx-math:`sim  `a{-1}(:nbsphinx-math:`mathbb{3}`1^{l/r};q),
+:nbsphinx-math:`mathcal{L}`{:nbsphinx-math:`pm 1`}{(2)}:nbsphinx-math:`left[ x + 1 +  x^{-1} right] `+a</em>{-2}(<span class="math">\mathbb{3}</span><em>1{l/r};q):nbsphinx-math:`mathcal{L}`{:nbsphinx-math:`pm 1`}^{(2)}:nbsphinx-math:`left[1right] `+ \ + :nbsphinx-math:`sum`{m=1}{:nbsphinx-math:`infty`}:nbsphinx-math:`Bigg`( a</em>{-m-1}(<span class="math">\mathbb{3}</span>_1<sup>{l/r};q):nbsphinx-math:</sup>left`(q`m + 1 +
+q<sup>{-m}:nbsphinx-math:</sup>right`)+a_{-m-2}(<span class="math">\mathbb{3}</span>1^{l/r};q):nbsphinx-math:<cite>Bigg</cite>):nbsphinx-math:<cite>mathcal{L}</cite>{<span class="math">\pm 1</span>}`{(2)} <span class="math">\left[\left(\frac{1}{\prod_{j=1}^{m} (x + x^{-1} - q^{j} - q^{-j})}\right)\right]</span>\</p>
+<p>$$</p>
+<p>which, using (2.20) reduces to</p>
+<div class="math">
+<p><img src="../_images/math/38832477431448ffd68939496e8248dd62e3b7a1.png" alt="\hat{Z}_{b}\left(S_{+1}^{3}(\mathbb{3}_1^l); W_{2}; \tau\right)
+ \sim \\   a_{-1}(\mathbb{3}_1^l;q)+a_{-2}(\mathbb{3}_1^l;q)
+ \\
+\sum_{m=1}^{\infty}\bigg( a_{-m-1}(\mathbb{3}_1^l;q)\left(q^m + 1 + q^{-m}\right)+a_{-m-2}(\mathbb{3}_1^l;q)\bigg)\frac{(-1)^m q^{\frac{m(m+1)}{2}}}{(q^{m+1};q)_m} \Bigg)"/></p>
+</div><p>and</p>
+<div class="math">
+<p><img src="../_images/math/baeee6f9cac1e058af241ec05abded2f59c4b8ee.png" alt="\hat{Z}_{b}\left(S_{-1}^{3}(\mathbb{3}_1^r); W_{2}; \tau\right)
+ \sim \\   a_{-1}(\mathbb{3}_1^r;q)+a_{-2}(\mathbb{3}_1^r;q)
+ \\
+\sum_{m=1}^{\infty}\bigg( a_{-m-1}(\mathbb{3}_1^r;q)\left(q^m + 1 + q^{-m}\right)+a_{-m-2}(\mathbb{3}_1^r;q)\bigg)\frac{q^{m^2}}{(q^{m+1};q)_m} \Bigg)"/></p>
+</div><div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">zhat_surg</span> <span class="o">=</span> <span class="p">(</span><span class="n">habiro_3r</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">q</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">zhat_surg</span> <span class="o">+=</span> <span class="n">habiro_3r</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="n">q_pochhammer</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="n">q</span><span class="o">**</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="o">+</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="p">))</span>
+    <span class="n">zhat_surg</span> <span class="o">+=</span> <span class="n">habiro_3r</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">q</span><span class="o">**</span><span class="p">((</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">/</span><span class="n">q_pochhammer</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Z_0(nu=2): &quot;</span><span class="p">,(</span><span class="mi">1</span><span class="o">/</span><span class="n">q</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">zhat_surg</span><span class="p">)</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="mi">20</span><span class="p">))</span>
+
+<span class="n">zhat_surg</span> <span class="o">=</span> <span class="mi">0</span><span class="c1">#-2/q**2+habiro_3l(-1)</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>
+    <span class="c1">#zhat_surg += habiro_3l(-n-1) * (-1)**(n)*q**(n*(n+1)/2)/q_pochhammer(n,q**(n+1))*(q**n+1+q**(-n))</span>
+    <span class="n">zhat_surg</span> <span class="o">+=</span> <span class="n">habiro_3l</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">q_pochhammer</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Z_0(nu=2): &quot;</span><span class="p">,(</span><span class="o">-</span><span class="n">q</span><span class="o">**</span><span class="mi">1</span><span class="o">*</span><span class="n">zhat_surg</span><span class="p">)</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="mi">20</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Z_0(nu=2):  (-1) + 1*q + 1*q^3 + 1*q^5 + (-1)*q^16 + Order(q^20)
+Z_0(nu=2):  (-1) + (-1)*q^2 + (-1)*q^4 + (-2)*q^6 + (-1)*q^8 + (-1)*q^9 + (-2)*q^10 + (-3)*q^12 + (-1)*q^13 + (-2)*q^14 + (-1)*q^15 + (-3)*q^16 + (-2)*q^17 + (-4)*q^18 + (-1)*q^19 + Order(q^20)
+</pre></div></div>
+</div>
+<p>The <img class="math" src="../_images/math/a5fa84b363f309ebc8fe7db38304541732c7de9a.png" alt="q"/>-expansions computed above match the <img class="math" src="../_images/math/b5a0a89920c819ae7066ef509542e9e168e74ae9.png" alt="\hat{Z}"/> invariant for <img class="math" src="../_images/math/ec18f45f50a557bb4639f55df074ecb9dadc0f83.png" alt="\Sigma(2,3,7)"/>, with a wilson line insertion in the highest weight <img class="math" src="../_images/math/9f73abb0cb592c88a0d0f8e36d1fa8e7470a65d2.png" alt="\nu=2"/> on the node with weight -7 and the <img class="math" src="../_images/math/8e74d1d1c612d6ccf08a34059b4811f441716695.png" alt="F_2"/> order 7 mock theta function of Ramanujan.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[98]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Zhat&quot;</span><span class="p">,</span> <span class="n">P</span><span class="o">.</span><span class="n">zhat</span><span class="p">([</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">b0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">wilson</span> <span class="o">=</span> <span class="p">[</span><span class="n">vector</span><span class="p">([</span><span class="mi">0</span><span class="p">])]</span><span class="o">*</span><span class="mi">3</span><span class="o">+</span><span class="p">[</span><span class="n">vector</span><span class="p">([</span><span class="mi">2</span><span class="p">])]))</span>
+<span class="n">F2</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="n">q_pochhammer</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">))</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;F_2: &quot;</span><span class="p">,</span> <span class="n">F2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Zhat q^(3/2)(1 - 1q^(1) - 1q^(3) - 1q^(5) + 1q^(16) + 1q^(20) + 1q^(26) + 1q^(31) - 1q^(53) - 1q^(60) + O(q^70))
+F_2:  1 + 1*q + 2*q^2 + 1*q^3 + 2*q^4 + 2*q^5 + 3*q^6 + 2*q^7 + 3*q^8 + 3*q^9 + 4*q^10 + 4*q^11 + 5*q^12 + 4*q^13 + 6*q^14 + 5*q^15 + 7*q^16 + 7*q^17 + 8*q^18 + 8*q^19 + Order(q^20)
+</pre></div></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="example532.html" class="btn btn-neutral float-left" title="Example 5.3.2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="example54.html" class="btn btn-neutral float-right" title="Example 5.4" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, M. Cheng, I. Coman, P. Kucharski, D. Passaro, G. Sgroi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

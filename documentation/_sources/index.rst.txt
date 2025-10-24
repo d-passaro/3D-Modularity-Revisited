@@ -1,0 +1,122 @@
+========================
+3D Modularity Revisited
+========================
+
+Companion Website
+=================
+
+This website serves as a companion to the paper *3D Modularity Revisited*. It illustrates some of the main computations from the paper's examples section in a replicable fashion. By providing code, we aim to help readers:
+
+- **Test the results** of the paper directly.
+- **Quickly extend** those results for their own research projects.
+
+You can find links below to the paper, its arXiv listing, and an upcoming GitHub repository that contains Jupyter notebooks and other supporting code. If you have any questions or feedback, feel free to contact us.
+
+Links to Paper and Additional Resources
+--------------------------------------
+ 
+- `Paper <https://arxiv.org/pdf/2403.14920>`__
+
+- `arXiv listing <https://arxiv.org/abs/2403.14920>`__
+
+- `GitHub repository <https://>`__
+
+Contact Information
+-------------------
+
+For inquiries about the paper, the code, or this website, you may reach out to any of the authors:
+
+- `Miranda Cheng <c.n.cheng@uva.nl>`__
+- `Ioana Coman <ioana.coman@ipmu.jp>`__
+- `Piotr Kucharski <piotr.kucharski@mimuw.edu.pl>`__
+- `Davide Passaro <dpassaro@caltech.edu>`__
+- `Gabriele Sgroi <gabrielesgroi94@gmail.com>`__
+
+How to Cite
+-----------
+
+- **Citing the Paper**:  
+  Please use the standard BibTeX entry provided on the arXiv:
+
+  .. code-block:: bibtex
+
+    @misc{cheng20243dmodularityrevisited,
+      title={3d Modularity Revisited}, 
+      author={Miranda C. N. Cheng and Ioana Coman and Piotr Kucharski and Davide Passaro and Gabriele Sgroi},
+      year={2024},
+      eprint={2403.14920},
+      archivePrefix={arXiv},
+      primaryClass={hep-th},
+      url={https://arxiv.org/abs/2403.14920}, 
+    }
+
+
+- **Citing this Website**:  
+  If you find the code or examples here helpful, please provide a reference along the lines of:
+
+  .. code-block:: bibtex
+
+     @misc{3DModularityWebsite,
+       author       = {Cheng, Miranda and Coman, Ioana and Kucharski, Piotr and 
+                       Passaro, Davide and Sgroi, Gabriele},
+       title        = {3D Modularity Revisited Website},
+       howpublished = {\\url{https://example.com}},
+       year         = {2025}
+     }
+
+Dependencies
+============
+
+Working through the examples in this website requires the following software to be installed on a user's machine:
+
+**1. Compendium of useful functions**
+
+  We provide with the notebooks a compendium of useful functions  in ``3d_modularity_revisited.sage``. This can be downloaded from the same GitHub repository of the notebooks.
+  This file should be loaded with the following command:
+
+  .. code-block:: python
+
+    load("/path/to/3d_modularity_revisited.sage")
+
+
+**2. Sage**
+
+`SageMath <https://www.sagemath.org/>`__ is a free open-source computer algebra system. We recommend installing Sage through `Anaconda (conda) <https://www.anaconda.com/>`__ and running it in a `Jupyter notebook <https://jupyter.org>`__ for convenience and reproducibility. Anaconda allows you to create isolated environments, making it simpler to manage package versions and dependencies.
+
+- **What is Sage?**  
+  Sage is a powerful, Python-based symbolic mathematics environment. It integrates multiple open-source math libraries into a unified interface.
+
+- **What are Anaconda and Jupyter Notebooks?**  
+  Anaconda is a popular Python (and data science) distribution that includes package management and environment management. Jupyter Notebooks provide an interactive way to write code, visualize results, and include explanatory text and mathematics in a single document.
+
+- **Why use a conda environment for Sage?**  
+  Installing Sage inside a conda environment ensures minimal conflicts with system-wide libraries and allows you to keep your mathematical software neatly organized.
+
+**3. pyPlumbing**
+
+`pyPlumbing <https://github.com/d-passaro/pyPlumbing>`__ is a SageMath package that provides specialized plumbing computation tools utilizing SageMath's powerful mathematical capabilities for an efficient computation of Ẑ-invariants. Note that pyPlumbing requires python version 3.12 or newer.
+
+
+Navigation
+==========
+
+Below is a brief summary of the main sections of this website. You can navigate using the links provided in the sidebar or follow the toctree at the end of this page.
+
+- **Function Documentation**  
+  Provides a reference for the main functions used throughout the examples, including explanations of arguments, return values, and usage tips.
+
+- **Theorems and Conjectures**  
+  Offers a high-level overview of the major theorems and conjectures discussed in the paper, with links to relevant code snippets that illustrate these concepts.
+
+- **Examples**  
+  Showcases fully worked-out examples that replicate the results of the paper, demonstrating how to combine the theorems, functions, and data in practical computations.
+
+
+.. toctree::
+   :hidden:
+   :titlesonly:
+  
+   theorems
+   functions
+   examples
+  

@@ -1,0 +1,246 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Example 5.3.2 &mdash; 3D Modularity Revisited 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=71331e4b" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Example 5.3.3" href="example533.html" />
+    <link rel="prev" title="Example 5.3.1" href="example531.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            3D Modularity Revisited
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../theorems.html">Theorems and Conjectures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../functions.html">3D Modularity Revisited Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="example511.html">Example 5.1.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example512.html">Example 5.1.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example513.html">Example 5.1.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example521.html">Example 5.2.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example522.html">Example 5.2.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example531.html">Example 5.3.1</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Example 5.3.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example533.html">Example 5.3.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example54.html">Example 5.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example551.html">Example 5.5.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example552.html">Example 5.5.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example553.html">Example 5.5.3</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">3D Modularity Revisited</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../examples.html">Examples</a></li>
+      <li class="breadcrumb-item active">Example 5.3.2</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/notebooks/example532.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Example-5.3.2">
+<h1>Example 5.3.2<a class="headerlink" href="#Example-5.3.2" title="Link to this heading"></a></h1>
+<p>This notebook demonstrates the results of subsection 5.3.2 of [1]. Here, we will compute the <img class="math" src="../_images/math/b5a0a89920c819ae7066ef509542e9e168e74ae9.png" alt="\hat{Z}"/> invariant with defects of the homology sphere <img class="math" src="../_images/math/a48d54609eb2ebbb5b9ebaf46cea84b01b427e7f.png" alt="M\left(-1; -\frac{1}{2}, -\frac{1}{3}, -\frac{1}{8}\right) = S^3_{-2}(\mathbf{3}^l_1)"/> and <img class="math" src="../_images/math/90757daf1bdf334bb0a8cc73bf6b45129a4093a6.png" alt="-M\left(-1; -\frac{1}{2}, -\frac{1}{3}, -\frac{1}{8}\right) = S^3_{+2}(\mathbf{3}^r_1)"/> by leveraging Conjecture 3 of the paper.</p>
+<section id="No-wilson-line-insertion,-negative-side">
+<h2>No wilson line insertion, negative side<a class="headerlink" href="#No-wilson-line-insertion,-negative-side" title="Link to this heading"></a></h2>
+<p>From equation 2.18, which we have</p>
+<div class="math">
+<p><img src="../_images/math/e6009864b5bf65f763605d0ba20d1ba6cd53513e.png" alt="\hat{Z}_{b_0} (S_{-2}^{3}(\mathbf{3}_1^l);\tau ) \sim
+\sum_{n=0}^{\infty}a_{-n-1}(\mathbf{3}_1^l;q)\frac{q^{n^{2}}}{\left(q^{n+1};q\right)_{n}}P^{p,b}_{n}(q^{-1})"/></p>
+</div><p>which we directly use to figure out the invariant. Inserting the Habiro coefficients for the left handed trefoil</p>
+<div class="math">
+<p><img src="../_images/math/d4332f85016ddd91c2b4c898806dd786c3661ce5.png" alt="a_{-m}(\mathbf{3}_1^l;q) = (-1)^{m}q^{\tfrac{m(m-3)}{2}}"/></p>
+</div><p>this leads us to</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sage.combinat.q_analogues</span><span class="w"> </span><span class="kn">import</span> <span class="n">q_pochhammer</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">habiro_3l</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">var</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">^</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="n">q</span><span class="o">^</span><span class="p">(</span><span class="n">m</span><span class="o">*</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">Zhat_habiro</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">habiro_3l</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">q</span><span class="o">^</span><span class="p">(</span><span class="n">n</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">q_pochhammer</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">q</span><span class="o">^</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">Zhat_habiro</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(-1)*q^(-1) + 1 + 1*q^2 + 1*q^6 + (-1)*q^7 + (-1)*q^13 + (-1)*q^19 + Order(q^20)
+</pre></div></div>
+</div>
+<p>Which we compare with the result from the plumbing description</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyPlumbing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Plumbing</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">Plumbing</span><span class="o">.</span><span class="n">from_Brieskorn</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
+<span class="n">P</span><span class="o">.</span><span class="n">zhat</span><span class="p">([</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">P</span><span class="o">.</span><span class="n">trivial_spin_c</span><span class="p">([</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+q^(-3/2)(1 - 1q^(1) - 1q^(3) - 1q^(7) + 1q^(8) + 1q^(14) + 1q^(20) + O(q^21))
+</pre></div></div>
+</div>
+</section>
+<section id="Wilson-line-insersion-of-W_1,-negative-side">
+<h2>Wilson line insersion of <img class="math" src="../_images/math/d78f415a3a0900fcf16f2084a631135a76222542.png" alt="W_1"/>, negative side<a class="headerlink" href="#Wilson-line-insersion-of-W_1,-negative-side" title="Link to this heading"></a></h2>
+<p>In our case Equation 2.22 reduces to</p>
+<div class="math">
+<p><img src="../_images/math/f737cd57a9bf68330737094fc9ed7bd2f8f4f2d6.png" alt="\hat{Z}_{b_0}(S_{-1}^{3}(\mathbf{3}_1^l);W_{1};\tau)\sim\left(a_{-1}(\mathbf{3}_1^l\mathbf{3}_1^l;q)\mathcal{L}_{-1}^{(1)}\left[x^{{1\over 2}} + x^{-{1\over 2}}\right] +\sum_{m=1}^{\infty} \mathcal{L}_{-1}^{(1)}\left[\left(x^{{1\over 2}}  +  x^{-{1\over 2}}       \right)\frac{a_{-m-1}(K;q)}{\prod_{j=1}^{m}(x+x^{-1}-q^{j}-q^{-j})}\right]\right)\\
+=2a_{-1}(\mathbf{3}_1^l;q)q^{1\over 4}+\sum_{n=1}^{\infty} a_{-n-1}(K;q)\frac{q^{n^2-n+{1\over 4}}}{(q^n;q)_n}"/></p>
+</div><p>where we used equation 2.24 in the last line. This leads to</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Zhat_habiro_w1</span> <span class="o">=</span> <span class="n">q</span><span class="o">^</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">habiro_3l</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span> <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="n">habiro_3l</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">q</span><span class="o">^</span><span class="p">(</span><span class="n">n</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="n">q_pochhammer</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">q</span><span class="o">^</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)))</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">Zhat_habiro_w1</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+q^(1/4)*((-1)*q^(-1) + 1 + 1*q + 1*q^3 + (-1)*q^10 + (-1)*q^14 + (-1)*q^17 + Order(q^20))
+</pre></div></div>
+</div>
+<p>Which we compare to the result of the plumbing desctiption</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P</span><span class="o">.</span><span class="n">display</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_example532_10_0.png" src="../_images/notebooks_example532_10_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P</span><span class="o">.</span><span class="n">zhat</span><span class="p">([</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">P</span><span class="o">.</span><span class="n">trivial_spin_c</span><span class="p">([</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span><span class="mi">20</span><span class="p">,</span><span class="n">wilson</span><span class="o">=</span><span class="p">[</span><span class="n">vector</span><span class="p">([</span><span class="mi">0</span><span class="p">])]</span><span class="o">*</span><span class="mi">3</span><span class="o">+</span><span class="p">[</span><span class="n">vector</span><span class="p">([</span><span class="mi">1</span><span class="p">])])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+q^(-5/4)(1 - 1q^(1) - 1q^(2) - 1q^(4) + 1q^(11) + 1q^(15) + 1q^(18) + O(q^19))
+</pre></div></div>
+</div>
+<p>Which matches up to an overall sign and <img class="math" src="../_images/math/a5fa84b363f309ebc8fe7db38304541732c7de9a.png" alt="q"/>-power.</p>
+<section id="Conclusion">
+<h3>Conclusion<a class="headerlink" href="#Conclusion" title="Link to this heading"></a></h3>
+<p>Comparing the results, we can see that we have covered the whole Weil representation with defect <img class="math" src="../_images/math/b5a0a89920c819ae7066ef509542e9e168e74ae9.png" alt="\hat{Z}"/> invariants. Therefore we have demonstrated the Modularity Conjecture, Conjecture 4 of [1] using knot surgeries and the defect surgery formula.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="example531.html" class="btn btn-neutral float-left" title="Example 5.3.1" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="example533.html" class="btn btn-neutral float-right" title="Example 5.3.3" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, M. Cheng, I. Coman, P. Kucharski, D. Passaro, G. Sgroi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

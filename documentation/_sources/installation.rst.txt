@@ -1,0 +1,25 @@
+============
+Installation of Prerequisites
+============
+
+The code requires a functioning installation of SageMath and pyPlumbing.
+It is recommended to install SageMath in a dedicated conda environment.
+
+
+- The code provided requires the use of a few prerequisites
+
+- The user who wishes to test the code and run the computation on their machine will need to install SageMath, 
+
+- SageMath can be easily installed with Anaconda in a dedicated environment
+
+- For OS-specific instruction on installation of Anaconda link to the conda webpage `Anaconda (conda) <https://www.anaconda.com/>`__
+
+- Once conda is installed, a new conda environment for sage can be created with the following command: ...
+
+- pyPlumbing is available for download from github at the following link `pyPlumbing <https://github.com/d-passaro/pyPlumbing>`__
+
+- The user should download the repository as a zip file and extract it or clone the repository
+
+- To install pyPlumbing, follow the instructions in the README file
+
+- Warning: pyPlumbing requires python version 3.12 at least

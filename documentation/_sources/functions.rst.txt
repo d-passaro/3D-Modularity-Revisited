@@ -1,0 +1,311 @@
+===================================
+3D Modularity Revisited Documentation
+===================================
+
+.. module:: 3d_modularity_revisited
+
+This document describes all functions implemented in the ``3d_modularity_revisited.sage`` module.
+
+This module contains functions for computing Weil representations and related modular forms for 3D modularity. The functions implement mathematical objects used in the study of mock theta functions and their modular properties.
+
+Key components:
+
+- Weil representation matrices and projectors
+- False theta series and mock theta functions
+- Indefinite theta functions
+- Ramanujan's order 7 mock theta functions
+
+Mathematical background: These functions implement results from algebraic number theory and modular forms, particularly focused on Weil representations of quadratic forms and their applications to mock theta functions.
+
+Weil Representation Functions
+-----------------------------
+
+.. function:: omega(m, n)
+
+   Compute the matrix :math:`\omega_{m,n}` of the Weil representation.
+
+   This function constructs a fundamental matrix in the Weil representation that encodes the action of certain transformations on theta functions.
+
+   :param m: Primary modulus parameter
+   :type m: int
+   :param n: Secondary modulus parameter, must divide m
+   :type n: int
+   :return: A :math:`(2m \times 2m)` matrix representing :math:`\omega_{m,n}`
+   :rtype: Matrix
+
+   **Mathematical Reference:** See [1] around equation (2.35) for mathematical details.
+
+   **Notes:** The matrix entries are determined by congruence conditions: :math:`\omega[i,j] = 1` if :math:`(i+j) \equiv 0 \pmod{2n}` and :math:`(i-j) \equiv 0 \pmod{2m/n}`, otherwise :math:`\omega[i,j] = 0`.
+
+.. function:: p_plus(m, n)
+
+   Compute the positive projection matrix :math:`P_{m,n}^+` of the Weil representation.
+
+   This projector extracts the '+1 eigenspace' of the omega matrix, which corresponds to certain symmetries in the theta functions.
+
+   :param m: Primary modulus parameter
+   :type m: int
+   :param n: Secondary modulus parameter
+   :type n: int
+   :return: The positive projection matrix :math:`P_{m,n}^+ = (I + \omega_{m,n})/2`
+   :rtype: Matrix
+
+   **Mathematical Reference:** See [1] around equation (2.36) for details.
+
+.. function:: p_minus(m, n)
+
+   Compute the negative projection matrix :math:`P_{m,n}^-` of the Weil representation.
+
+   This projector extracts the '-1 eigenspace' of the omega matrix, which corresponds to antisymmetric components in the theta functions.
+
+   :param m: Primary modulus parameter
+   :type m: int
+   :param n: Secondary modulus parameter
+   :type n: int
+   :return: The negative projection matrix :math:`P_{m,n}^- = (I - \omega_{m,n})/2`
+   :rtype: Matrix
+
+   **Mathematical Reference:** See [1] around equation (2.36) for details.
+
+.. function:: weil_projector(m, K, irrep=True)
+
+   Compute the complete projector for the Weil representation for subset K.
+
+   This function constructs the main projector by composing positive projections for each element in K, followed by optional irreducible representation adjustments and a final negative projection.
+
+   :param m: Primary modulus parameter
+   :type m: int
+   :param K: Subset of divisors to project onto
+   :type K: List[int]
+   :param irrep: Whether to apply irreducible representation corrections
+   :type irrep: bool
+   :return: The complete Weil projector matrix
+   :rtype: np.ndarray
+
+   **Mathematical Reference:** See [1] around equation (2.39) for details.
+
+   **Algorithm:**
+
+   1. Start with identity matrix
+   2. Apply positive projections for each n in K
+   3. If irrep=True, apply corrections for square divisors
+   4. Apply final negative projection
+
+.. function:: weil_reps(m, K, irrep=True)
+
+   Extract Weil representation data from the projector.
+
+   This function computes the projector and extracts the non-zero components along with their signs, identifying the irreducible representations.
+
+   :param m: Primary modulus parameter
+   :type m: int
+   :param K: Subset of divisors
+   :type K: List[int]
+   :param irrep: Whether to use irreducible representation
+   :type irrep: bool
+   :return: Tuple containing list of index lists for each representation and list of sign lists for each representation
+   :rtype: Tuple[List[List[int]], List[List[int]]]
+
+   **Notes:** This function identifies unique representations by finding rows of the projector with non-zero entries and extracting their support and signs.
+
+Theta Series Functions
+----------------------
+
+.. function:: false_theta(m, r, max_n, q=var("q"))
+
+   Compute the false theta series :math:`\psi_{m,r}(q)`.
+
+   False theta series are q-series that appear in the study of mock theta functions and have applications in partition theory and modular forms.
+
+   :param m: Modulus parameter
+   :type m: int
+   :param r: Residue class parameter
+   :type r: int
+   :param max_n: Maximum summation index (series truncated at ±max_n)
+   :type max_n: int
+   :param q: Formal variable (default: var("q"))
+   :type q: SymbolicExpression
+   :return: The false theta series :math:`\psi_{m,r}(q) = \sum_{n=-\mathrm{max\_n}}^{\mathrm{max\_n}} \mathrm{sign}(r + 2mn) \cdot q^{(r + 2mn)^2/(4m)}`
+   :rtype: SymbolicExpression
+
+   **Notes:** The 'round(sign(k))' gives 0 for k=0, ±1 for k≠0, which differs from the standard sign function that gives 0 for k=0.
+
+.. function:: Psi(m, r, max_n, q=var("q"))
+
+   Compute the Psi theta series (alternative form).
+
+   This is similar to false_theta but uses the standard sign function instead of the rounded version.
+
+   :param m: Modulus parameter
+   :type m: int
+   :param r: Residue class parameter
+   :type r: int
+   :param max_n: Maximum summation index
+   :type max_n: int
+   :param q: Formal variable
+   :type q: SymbolicExpression
+   :return: The Psi series :math:`\Psi_{m,r}(q) = \sum_{n=-\mathrm{max\_n}}^{\mathrm{max\_n}} \mathrm{sign}(r + 2mn) \cdot q^{(r + 2mn)^2/(4m)}`
+   :rtype: SymbolicExpression
+
+.. function:: unary_theta(m, r, max_n, q=var("q"))
+
+   Compute the unary theta series (weighted by coefficients).
+
+   This is a variant of the theta series where terms are weighted by their coefficient values rather than just signs.
+
+   :param m: Modulus parameter
+   :type m: int
+   :param r: Residue class parameter
+   :type r: int
+   :param max_n: Maximum summation index
+   :type max_n: int
+   :param q: Formal variable
+   :type q: SymbolicExpression
+   :return: The unary theta series :math:`\theta_{m,r}(q) = \sum_{n=-\mathrm{max\_n}}^{\mathrm{max\_n}} (r + 2mn) \cdot q^{(r + 2mn)^2/(4m)}`
+   :rtype: SymbolicExpression
+
+.. function:: indefinite_theta(A, a, b, c1, c2, n_max)
+
+   Compute indefinite theta functions.
+
+   Indefinite theta functions are generalizations of classical theta functions to indefinite quadratic forms, important in the theory of mock theta functions.
+
+   :param A: Quadratic form matrix (typically 2×2)
+   :type A: Matrix
+   :param a: Translation vector
+   :type a: Vector
+   :param b: Phase vector
+   :type b: Vector
+   :param c1: First sign vector for rho function
+   :type c1: Vector
+   :param c2: Second sign vector for rho function
+   :type c2: Vector
+   :param n_max: Maximum summation range
+   :type n_max: int
+   :return: The indefinite theta function :math:`\theta(A,a,b,c_1,c_2) = \sum_n \rho(n+a) \cdot q^{(n+a)^T A(n+a)/2} \cdot \exp(2\pi i n^T Ab)`
+   :rtype: SymbolicExpression
+
+   **Notes:** The rho function :math:`\rho(n) = \text{sign}(c_1^T An) - \text{sign}(c_2^T An)` provides the signing that makes the series convergent despite the indefinite form.
+
+.. function:: zhat_indefinite_theta(p, x, r, chi, n_max=10, nu=[0, 0, 0], c2=None)
+
+   Compute the Z-hat indefinite theta function.
+
+   This is a specialized indefinite theta function that appears in the study of mock theta functions and their modular transformation properties.
+
+   :param p: List of three prime parameters
+   :type p: List[int]
+   :param x: Primary modular parameter
+   :type x: int
+   :param r: Ramanujan parameter
+   :type r: int
+   :param chi: Character parameter
+   :type chi: int
+   :param n_max: Maximum summation range (default: 10)
+   :type n_max: int
+   :param nu: Perturbation parameters (default: [0,0,0])
+   :type nu: List[int]
+   :param c2: Optional second sign vector
+   :type c2: Optional[Vector]
+   :return: The normalized Z-hat function as a power series
+   :rtype: PowerSeries
+
+   **Notes:** This function computes a ratio of indefinite theta functions normalized by a Ramanujan theta function, which yields modular objects related to mock theta functions.
+
+.. function:: ramanujan_theta(x, chi, n_max)
+
+   Compute Ramanujan's theta function.
+
+   This is a classical theta function that appears in the normalization of various mock theta functions and modular forms.
+
+   :param x: Modular parameter
+   :type x: int
+   :param chi: Character parameter
+   :type chi: int
+   :param n_max: Maximum summation range
+   :type n_max: int
+   :return: The Ramanujan theta function :math:`\theta(x,\chi) = \sum_{n=-\mathrm{n\_max}}^{\mathrm{n\_max}} (-1)^n \cdot q^{x/2 \cdot (n - \chi/(2x))^2}`
+   :rtype: SymbolicExpression
+
+   **Notes:** This function is closely related to classical Jacobi theta functions and provides the modular framework for understanding mock theta functions.
+
+Ramanujan Mock Theta Functions
+------------------------------
+
+.. function:: F0(prec)
+
+   Compute Ramanujan's order 7 mock theta function F0(q).
+
+   F0 is one of Ramanujan's third-order mock theta functions, which exhibit modular-like transformation properties but are not quite modular forms.
+
+   :param prec: Precision (maximum power of q to compute)
+   :type prec: int
+   :return: :math:`F_0(q) = \sum_{n \geq 0} \frac{q^{n^2}}{(q^{n+1}; q)_n}`
+   :rtype: PowerSeries
+
+   **Mathematical Definition:** :math:`F_0(q) = \sum_{n \geq 0} \frac{q^{n^2}}{(q^{n+1}; q)_n}` where :math:`(a; q)_n = \prod_{k=0}^{n-1} (1 - aq^k)` is the q-Pochhammer symbol.
+
+   **Notes:** The series is truncated based on the constraint :math:`n^2 < \text{prec}` to ensure all computed terms are within the desired precision.
+
+.. function:: F1(prec)
+
+   Compute Ramanujan's order 7 mock theta function F1(q).
+
+   :param prec: Precision (maximum power of q to compute)
+   :type prec: int
+   :return: :math:`F_1(q) = \sum_{n \geq 0} \frac{q^{n^2}}{(q^n; q)_n}`
+   :rtype: PowerSeries
+
+   **Mathematical Definition:** :math:`F_1(q) = \sum_{n \geq 0} \frac{q^{n^2}}{(q^n; q)_n}`
+
+.. function:: F2(prec)
+
+   Compute Ramanujan's order 7 mock theta function F2(q).
+
+   :param prec: Precision (maximum power of q to compute)
+   :type prec: int
+   :return: :math:`F_2(q) = \sum_{n \geq 0} \frac{q^{n^2+n}}{(q^{n+1}; q)_{n+1}}`
+   :rtype: PowerSeries
+
+   **Mathematical Definition:** :math:`F_2(q) = \sum_{n \geq 0} \frac{q^{n^2+n}}{(q^{n+1}; q)_{n+1}}`
+
+Utility Functions
+-----------------
+
+.. function:: format_expansion(expansion, order=20)
+
+   Format a power series expansion for improved readability.
+
+   This function normalizes a power series by factoring out the leading term and presenting it in a more readable form.
+
+   :param expansion: The power series to format
+   :type expansion: PowerSeries
+   :param order: Order for series expansion (default: 20)
+   :type order: int
+   :return: Formatted expansion as leading_coeff * q^leading_power * (normalized_series)
+   :rtype: PowerSeries
+
+   **Notes:** The function extracts the first coefficient and power, then factors them out to present the series in normalized form.
+
+.. function:: P_poly(n, p, b)
+
+   Load precomputed P polynomial for given parameters.
+
+   P polynomials are special polynomials that appear in the study of mock theta functions and their modular properties.
+
+   :param n: Primary parameter
+   :type n: int
+   :param p: Secondary parameter
+   :type p: int
+   :param b: Tertiary parameter
+   :type b: int
+   :return: The P polynomial value
+   :rtype: Union[int, SymbolicExpression]
+   :raises ValueError: If polynomial with specified parameters is not found
+
+   **Notes:** Returns 1 for trivial cases (n < 2 or p = 0). For other cases, looks up precomputed values from the pandas DataFrame.
+
+References
+----------
+
+[1] Cheng Et Al. 3D Modularity Revisited

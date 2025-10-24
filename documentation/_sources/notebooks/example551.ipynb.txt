@@ -1,0 +1,185 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "vscode": {
+     "languageId": "sage"
+    }
+   },
+   "source": [
+    "# Example 5.5.1\n",
+    "\n",
+    "In this notebook we will demonstrate an application of the regularized indefinite theta function formula for the computation of the $\\hat{Z}$ invariants of $-\\Sigma\\left(2,3,7\\right)$, with and without defects. \n",
+    "We will compare these results with the invariants on the $\\Sigma\\left(2,3,7\\right)$ and relevant $q$-series stemming from modularity. We will compare the invariants on the positive manifold with [2].\n",
+    "\n",
+    "The $\\hat{Z}$ invariants of the $\\Sigma\\left(2,3,7\\right)$ integer homology sphere is known to transform in the Weil representation identified by $m+K=42+6,14,21$. \n",
+    "The $q$-series making up this representation are"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "metadata": {
+    "vscode": {
+     "languageId": "sage"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "theta_42,1 2*q^0.005952380952380952*(1.0 + (-1.0)*q + (-1.0)*q^5 + 0.9999999999999999*q^10 + (-1.0)*q^11 + 0.9999999999999999*q^18 + Order(q^20))\n",
+      "theta_42,5 2*q^0.1488095238095238*(1.0 + 1.0*q^2 + 1.0*q^3 + 1.0*q^8 + (-0.9999999999999999)*q^13 + Order(q^20))\n",
+      "theta_42,11 2*q^0.7202380952380952*(1.0 + 1.0*q + 1.0*q^3 + 1.0*q^5 + (-1.0)*q^16 + Order(q^20))\n"
+     ]
+    }
+   ],
+   "source": [
+    "from pyPlumbing import Plumbing\n",
+    "import itertools\n",
+    "load(\"weil_rep_fncs.sage\")\n",
+    "m = 42\n",
+    "K = [1,6,14,21]\n",
+    "for idxl,sgnl in zip(*weil_reps(m,K)):\n",
+    "    print(f'theta_{m},{idxl[0]}', format_expansion(sum(round(sgn)*false_theta(m,idx,8) for idx,sgn in zip(idxl,sgnl))))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "vscode": {
+     "languageId": "sage"
+    }
+   },
+   "source": [
+    "We compare these with the $\\hat{Z}$ invariants computed from plumbing."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "metadata": {
+    "vscode": {
+     "languageId": "sage"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "q^(1/2)(4 - 4q^(1) - 4q^(5) + 4q^(10) - 4q^(11) + 4q^(18) + 4q^(30) - 4q^(41) + O(q^42))\n",
+      "q^(3/4)(4 - 4q^(2) - 4q^(3) - 4q^(8) + 4q^(13) + 4q^(22) + 4q^(25) + O(q^26))\n",
+      "q^(3/2)(4 - 4q^(1) - 4q^(3) - 4q^(5) + 4q^(16) + 4q^(20) + 4q^(26) + 4q^(31) - 4q^(53) - 4q^(60) + O(q^70))\n"
+     ]
+    }
+   ],
+   "source": [
+    "P = Plumbing.from_Brieskorn([2,3,7])\n",
+    "b = P.trivial_spin_c([\"A\",1])\n",
+    "for w in [0,1,2]:\n",
+    "    zhat = P.zhat([\"A\",1],b,20,wilson=[vector([0])]*5+[vector([w])])\n",
+    "    print(zhat)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "vscode": {
+     "languageId": "sage"
+    }
+   },
+   "source": [
+    "The $\\hat{Z}$ invariant of the orientation reversed manifold is expected to match the order 7 mock theta functions of Ramanujan up to an overall coefficient and a $q$-power   "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "metadata": {
+    "vscode": {
+     "languageId": "sage"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "F0(q)= 1 + 1*q + 1*q^3 + 1*q^4 + 1*q^5 + 2*q^7 + 1*q^8 + 2*q^9 + 1*q^10 + 2*q^11 + 1*q^12 + 3*q^13 + 2*q^14 + 3*q^15 + 3*q^16 + 3*q^17 + 2*q^18 + 5*q^19 + Order(q^20)\n",
+      "F1(q)= 1 + 1*q + 1*q^2 + 1*q^3 + 2*q^4 + 1*q^5 + 2*q^6 + 2*q^7 + 2*q^8 + 3*q^9 + 3*q^10 + 2*q^11 + 4*q^12 + 4*q^13 + 4*q^14 + 4*q^15 + 6*q^16 + 5*q^17 + 6*q^18 + 6*q^19 + Order(q^20)\n",
+      "F2(q)= 1 + 1*q + 2*q^2 + 1*q^3 + 2*q^4 + 2*q^5 + 3*q^6 + 2*q^7 + 3*q^8 + 3*q^9 + 4*q^10 + 4*q^11 + 5*q^12 + 4*q^13 + 6*q^14 + 5*q^15 + 7*q^16 + 7*q^17 + 8*q^18 + 8*q^19 + Order(q^20)\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(\"F0(q)=\",F0(20).series(q,20))\n",
+    "print(\"F1(q)=\",F1(20).series(q,20))\n",
+    "print(\"F2(q)=\",F2(20).series(q,20))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "vscode": {
+     "languageId": "sage"
+    }
+   },
+   "source": [
+    "Following Conjecture 5, with defects in heighest weight representations $\\nu=0,1,2$ on the last node of the leg corresponding to $7$, we get"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "metadata": {
+    "vscode": {
+     "languageId": "sage"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Z(-Sigma(2,3,7),nu=0)= ((-2) + (-2)*q + (-2)*q^3 + (-2)*q^4 + (-2)*q^5 + (-4)*q^7 + (-2)*q^8 + (-4)*q^9 + (-2)*q^10 + (-4)*q^11 + (-2)*q^12 + (-6)*q^13 + (-4)*q^14 + (-6)*q^15 + (-6)*q^16 + (-6)*q^17 + (-4)*q^18 + (-10)*q^19 + Order(q^20))/q^(1/168)\n",
+      "Z(-Sigma(2,3,7),nu=1)= q^(143/168)*((-2) + (-2)*q + (-2)*q^2 + (-4)*q^3 + (-2)*q^4 + (-4)*q^5 + (-4)*q^6 + (-4)*q^7 + (-6)*q^8 + (-6)*q^9 + (-4)*q^10 + (-8)*q^11 + (-8)*q^12 + (-8)*q^13 + (-8)*q^14 + (-12)*q^15 + (-10)*q^16 + (-12)*q^17 + (-12)*q^18 + (-14)*q^19 + Order(q^20))\n",
+      "Z(-Sigma(2,3,7),nu=2)= q^(47/168)*((-2) + (-2)*q + (-4)*q^2 + (-2)*q^3 + (-4)*q^4 + (-4)*q^5 + (-6)*q^6 + (-4)*q^7 + (-6)*q^8 + (-6)*q^9 + (-8)*q^10 + (-8)*q^11 + (-10)*q^12 + (-8)*q^13 + (-12)*q^14 + (-10)*q^15 + (-14)*q^16 + (-14)*q^17 + (-16)*q^18 + (-16)*q^19 + Order(q^20))\n"
+     ]
+    }
+   ],
+   "source": [
+    "p = [2,3,7]\n",
+    "r = 1\n",
+    "x = 3\n",
+    "chi = 1\n",
+    "print(\"Z(-Sigma(2,3,7),nu=0)=\",zhat_indefinte_theta(p,x,r,chi, n_max=20,nu=[0,0,0]))\n",
+    "print(\"Z(-Sigma(2,3,7),nu=1)=\",zhat_indefinte_theta(p,x,r,chi, n_max=20,nu=[0,0,1]))\n",
+    "print(\"Z(-Sigma(2,3,7),nu=2)=\",zhat_indefinte_theta(p,x,r,chi, n_max=20,nu=[0,0,2]))"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "SageMath 10.5",
+   "language": "sage",
+   "name": "sagemath"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.12.9"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}

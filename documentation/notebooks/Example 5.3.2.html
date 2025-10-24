@@ -1,0 +1,967 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Example 5.3.2 &mdash; 3D Modularity Revisited 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=71331e4b" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            3D Modularity Revisited
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../theorems.html">Theorems and Conjectures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../functions.html">3D Modularity Revisited Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">3D Modularity Revisited</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Example 5.3.2</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/notebooks/Example 5.3.2.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Example-5.3.2">
+<h1>Example 5.3.2<a class="headerlink" href="#Example-5.3.2" title="Link to this heading"></a></h1>
+<div class="math">
+<p><img src="../_images/math/a067ff6c8f71ceb6e4bee69542e6536cdaabb1c3.png" alt="\def\knot{\mathbb{3}_1^l}"/></p>
+</div><p>In this notebook we demonstrate the computation of the <img class="math" src="../_images/math/b5a0a89920c819ae7066ef509542e9e168e74ae9.png" alt="\hat{Z}"/> invariant through knot surgery. In this example we will compute <img class="math" src="../_images/math/d94997a2318fec7e8e5bc4d8d79bb633675f9411.png" alt="2"/> surgery on the left handed trefoil which will lead to expressions for the <img class="math" src="../_images/math/b5a0a89920c819ae7066ef509542e9e168e74ae9.png" alt="\hat{Z}"/> invariants for <img class="math" src="../_images/math/e504b514e587fed6092001f2115870d69068db20.png" alt="-M\left(-1; \frac{1}{2},\frac{1}{3},\frac{1}{8}\right)"/>.</p>
+<p>In practice the difference with the example 5.3.1 will be that we will need to include the <img class="math" src="../_images/math/7ca2339a5fc5adb8656bb0280a8d6669d7e31ee7.png" alt="P^{2,b}_{n}"/> polynomials, which are collected in appendix B of the paper. In SageMath we load them with a helper function which is included in <code class="docutils literal notranslate"><span class="pre">3d_modularity_revisited.sage</span></code>.</p>
+<p>Finally, we will match the expressions we obtain with the optimal mock Jacobi theta functions transforming in the same Weil representation <img class="math" src="../_images/math/41c53e4334a5f5e77d6a3fa2d7c98990737a6dc8.png" alt="m+K=24+8"/>.</p>
+<p>Following equation (2.22) of [1] we have</p>
+<aside class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<span class="docutils literal">\hat{Z}_{b}(S_{+2}^{3}(\knot);W_{\nu};\tau)\sim\\
+\left(a_{-1}(\knot;q)\mathcal{L}_{+2}^{(b+\nu)}\left[x^{{\nu\over 2}}  +x^{{\nu\over 2}-1}+ \dots+   x^{-{\nu\over 2}}\right] +\right. \\
+\left.\sum_{m=1}^{\infty} \mathcal{L}_{+2}^{(b+\nu)}\left[\left(x^{{\nu\over 2}}  +x^{{\nu\over 2}-1}+ \dots+   x^{-{\nu\over 2}}       \right)\frac{a_{-m-1}(\knot;q)}{\prod_{j=1}^{m}(x+x^{-1}-q^{j}-q^{-j})}\right]\right)</span>)</p>
+<p>latex exited with error
+[stdout]
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2024-11-01&gt; patch level 2
+L3 programming layer &lt;2025-01-18&gt;
+(/usr/share/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2024/06/29 v1.4n Standard LaTeX document class
+(/usr/share/texmf-dist/tex/latex/base/size12.clo))
+(/usr/share/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/share/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/share/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/share/texmf-dist/tex/latex/anyfontsize/anyfontsize.sty)
+(/usr/share/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/share/texmf-dist/tex/latex/l3backend/l3backend-dvips.def) (./math.aux)
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd)
+! Undefined control sequence.
+&lt;argument&gt; ...split}\hat {Z}_{b}(S_{+2}^{3}(\knot 
+                                                  );W_{\nu };\tau )\sim \\ \...
+l.16 ...1}-q^{j}-q^{-j})}\right]\right)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...};\tau )\sim \\ \left (a_{-1}(\knot 
+                                                  ;q)\mathcal {L}_{+2}^{(b+\...
+l.16 ...1}-q^{j}-q^{-j})}\right]\right)\end{split}
+                                                  
+
+Package amsmath Warning: Foreign command \over;
+(amsmath)                \frac or \genfrac should be used instead
+(amsmath)                 on input line 16.
+
+! Undefined control sequence.
+&lt;argument&gt; a_{-m-1}(\knot 
+                          ;q)
+l.16 ...1}-q^{j}-q^{-j})}\right]\right)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...split}\hat {Z}_{b}(S_{+2}^{3}(\knot 
+                                                  );W_{\nu };\tau )\sim \\ \...
+l.16 ...1}-q^{j}-q^{-j})}\right]\right)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...};\tau )\sim \\ \left (a_{-1}(\knot 
+                                                  ;q)\mathcal {L}_{+2}^{(b+\...
+l.16 ...1}-q^{j}-q^{-j})}\right]\right)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; a_{-m-1}(\knot 
+                          ;q)
+l.16 ...1}-q^{j}-q^{-j})}\right]\right)\end{split}
+                                                  
+
+[1] (./math.aux) )
+(see the transcript file for additional information)
+Output written on math.dvi (1 page, 1592 bytes).
+Transcript written on math.log.
+</p>
+</aside>
+<p>which we will apply on a case per case basis in order to compute the invariants.</p>
+<p>In case where no defects are inserted, this simplifies to</p>
+<aside class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<span class="docutils literal">\hat{Z}_{b}(S_{+2}^{3}(\knot);\tau)\sim\\\left(a_{-1}(\knot;q) \mathcal{L}_{+2}^{(b)}\left[1\right]+ \sum_{m=1}^{\infty} a_{-m-1}(\knot;q)\mathcal{L}_{+2}^{(b)}\left[\frac{1}{\prod_{j=1}^{m}(x+x^{-1}-q^{j}-q^{-j})}\right]\right)</span>)</p>
+<p>latex exited with error
+[stdout]
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2024-11-01&gt; patch level 2
+L3 programming layer &lt;2025-01-18&gt;
+(/usr/share/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2024/06/29 v1.4n Standard LaTeX document class
+(/usr/share/texmf-dist/tex/latex/base/size12.clo))
+(/usr/share/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/share/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/share/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/share/texmf-dist/tex/latex/anyfontsize/anyfontsize.sty)
+(/usr/share/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/share/texmf-dist/tex/latex/l3backend/l3backend-dvips.def) (./math.aux)
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd)
+! Undefined control sequence.
+&lt;argument&gt; ...split}\hat {Z}_{b}(S_{+2}^{3}(\knot 
+                                                  );\tau )\sim \\\left (a_{-...
+l.14 ...1}-q^{j}-q^{-j})}\right]\right)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ... );\tau )\sim \\\left (a_{-1}(\knot 
+                                                  ;q) \mathcal {L}_{+2}^{(b)...
+l.14 ...1}-q^{j}-q^{-j})}\right]\right)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...sum _{m=1}^{\infty } a_{-m-1}(\knot 
+                                                  ;q)\mathcal {L}_{+2}^{(b)}...
+l.14 ...1}-q^{j}-q^{-j})}\right]\right)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...split}\hat {Z}_{b}(S_{+2}^{3}(\knot 
+                                                  );\tau )\sim \\\left (a_{-...
+l.14 ...1}-q^{j}-q^{-j})}\right]\right)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ... );\tau )\sim \\\left (a_{-1}(\knot 
+                                                  ;q) \mathcal {L}_{+2}^{(b)...
+l.14 ...1}-q^{j}-q^{-j})}\right]\right)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...sum _{m=1}^{\infty } a_{-m-1}(\knot 
+                                                  ;q)\mathcal {L}_{+2}^{(b)}...
+l.14 ...1}-q^{j}-q^{-j})}\right]\right)\end{split}
+                                                  
+
+[1] (./math.aux) )
+(see the transcript file for additional information)
+Output written on math.dvi (1 page, 1016 bytes).
+Transcript written on math.log.
+</p>
+</aside>
+<p>which we can expand using equation (2.20)</p>
+<div class="math">
+<p><img src="../_images/math/57c17aafa565fec3afc9b88660bc1ef8c811d270.png" alt="\mathcal{L}_{+p}^{(b)}\left[\frac{1}{\prod_{j=1}^{n}(x+x^{-1}-q^{j}-q^{-j})}\right] = q^{\frac{b(2p-b)}{4p}}  \frac{(-1)^{n}q^{\frac{n(n+1)}{2}}}{\left(q^{n+1};q\right)_{n}}P_{n}^{p,b}(q)~, \quad p\in\mathbb{Z}_{+}~,"/></p>
+</div><p>leaving us with</p>
+<aside class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<span class="docutils literal">\hat{Z}_{b}(S_{+2}^{3}(\knot);\tau)\sim\\ q^{\frac{b(4-b)}{8}}\left(a_{-1}(\knot;q)P_{0}^{2,b}(q)\delta_{b,0} + \sum_{m=1}^{\infty} a_{-m-1}(\knot;q)\frac{(-1)^{m}q^{\frac{m(m+1)}{2}}}{\left(q^{m+1};q\right)_{m}}P_{m}^{2,b}(q)\right)~.</span>)</p>
+<p>latex exited with error
+[stdout]
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2024-11-01&gt; patch level 2
+L3 programming layer &lt;2025-01-18&gt;
+(/usr/share/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2024/06/29 v1.4n Standard LaTeX document class
+(/usr/share/texmf-dist/tex/latex/base/size12.clo))
+(/usr/share/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/share/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/share/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/share/texmf-dist/tex/latex/anyfontsize/anyfontsize.sty)
+(/usr/share/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/share/texmf-dist/tex/latex/l3backend/l3backend-dvips.def) (./math.aux)
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd)
+! Undefined control sequence.
+&lt;argument&gt; ...split}\hat {Z}_{b}(S_{+2}^{3}(\knot 
+                                                  );\tau )\sim \\ q^{\frac {...
+l.14 ...ht)_{m}}P_{m}^{2,b}(q)\right)~.\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...rac {b(4-b)}{8}}\left (a_{-1}(\knot 
+                                                  ;q)P_{0}^{2,b}(q)\delta _{...
+l.14 ...ht)_{m}}P_{m}^{2,b}(q)\right)~.\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...sum _{m=1}^{\infty } a_{-m-1}(\knot 
+                                                  ;q)\frac {(-1)^{m}q^{\frac...
+l.14 ...ht)_{m}}P_{m}^{2,b}(q)\right)~.\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...split}\hat {Z}_{b}(S_{+2}^{3}(\knot 
+                                                  );\tau )\sim \\ q^{\frac {...
+l.14 ...ht)_{m}}P_{m}^{2,b}(q)\right)~.\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...rac {b(4-b)}{8}}\left (a_{-1}(\knot 
+                                                  ;q)P_{0}^{2,b}(q)\delta _{...
+l.14 ...ht)_{m}}P_{m}^{2,b}(q)\right)~.\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...sum _{m=1}^{\infty } a_{-m-1}(\knot 
+                                                  ;q)\frac {(-1)^{m}q^{\frac...
+l.14 ...ht)_{m}}P_{m}^{2,b}(q)\right)~.\end{split}
+                                                  
+
+[1] (./math.aux) )
+(see the transcript file for additional information)
+Output written on math.dvi (1 page, 1216 bytes).
+Transcript written on math.log.
+</p>
+</aside>
+<p>We select for the Spin<img class="math" src="../_images/math/801a775aee47eaed8fcf20d398768342c9887ba5.png" alt="-c"/> structure by setting <img class="math" src="../_images/math/909e24d245f258d326cb27b9517126ea124435db.png" alt="b=0"/> or <img class="math" src="../_images/math/f0ea17fb16d008dd9faa0380b0d9971af5ef431d.png" alt="b=1"/>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sage.combinat.q_analogues</span><span class="w"> </span><span class="kn">import</span> <span class="n">q_pochhammer</span>
+<span class="n">load</span><span class="p">(</span><span class="s1">&#39;3d_modularity_revisited.sage&#39;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">habiro_3l</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+   <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">m</span><span class="o">*</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">m</span><span class="o">*</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">b</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">zhat_surg</span> <span class="o">=</span> <span class="mi">0</span><span class="c1">#habiro_3l(-1)</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">P_poly</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">P</span> <span class="ow">in</span> <span class="n">ZZ</span><span class="p">:</span>
+        <span class="n">P</span> <span class="o">=</span> <span class="n">P</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">q</span><span class="p">)</span>
+    <span class="n">zhat_surg</span> <span class="o">+=</span> <span class="n">habiro_3l</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">q_pochhammer</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="n">P</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Z_0(nu=0): &quot;</span><span class="p">,</span><span class="n">q</span><span class="o">^</span><span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="p">(</span><span class="mi">4</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="n">q</span><span class="o">*</span><span class="n">zhat_surg</span><span class="p">)</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="mi">20</span><span class="p">))</span>
+
+<span class="n">b</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">zhat_surg</span> <span class="o">=</span> <span class="mi">0</span><span class="c1">#habiro_3l(-1)</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">P_poly</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">P</span> <span class="ow">in</span> <span class="n">ZZ</span><span class="p">:</span>
+        <span class="n">P</span> <span class="o">=</span> <span class="n">P</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">q</span><span class="p">)</span>
+    <span class="n">zhat_surg</span> <span class="o">+=</span> <span class="n">habiro_3l</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">q_pochhammer</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="n">P</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Z_1(nu=0): &quot;</span><span class="p">,</span><span class="n">q</span><span class="o">^</span><span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="p">(</span><span class="mi">4</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="n">zhat_surg</span><span class="p">)</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="mi">20</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Z_0(nu=0):  1 + 1*q + 1*q^3 + 1*q^4 + 1*q^5 + 1*q^6 + 2*q^7 + 1*q^8 + 3*q^9 + 2*q^10 + 3*q^11 + 3*q^12 + 5*q^13 + 3*q^14 + 5*q^15 + 6*q^16 + 7*q^17 + 7*q^18 + 9*q^19 + Order(q^20)
+Z_1(nu=0):  q^(3/8)*(1*q^(-1) + 1 + 1*q^2 + 1*q^3 + 2*q^4 + 2*q^6 + 2*q^7 + 3*q^8 + 2*q^9 + 4*q^10 + 3*q^11 + 4*q^12 + 4*q^13 + 6*q^14 + 7*q^15 + 8*q^16 + 6*q^17 + 10*q^18 + 10*q^19 + Order(q^20))
+</pre></div></div>
+</div>
+<div class="math">
+<p><img src="../_images/math/a067ff6c8f71ceb6e4bee69542e6536cdaabb1c3.png" alt="\def\knot{\mathbb{3}_1^l}"/></p>
+</div><p>We can compute the invariants in the <img class="math" src="../_images/math/5d7372131a51d2f42856d9e4b1853d6d7d625de6.png" alt="\nu=1"/> case in a similar way, starting from (2.20) we land at</p>
+<aside class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<span class="docutils literal">\hat{Z}_{b}(S_{+2}^{3}(\knot);W_{1};\tau)\sim\\\left(a_{-1}(\knot;q)\mathcal{L}_{+2}^{(b+1)}\left[x^{{1\over 2}}  + x^{-{1\over 2}}\right] +
+\sum_{m=1}^{\infty} a_{-m-1}(\knot;q)\mathcal{L}_{+2}^{(b+1)}\left[\frac{\left(x^{{1\over 2}}  + x^{-{1\over 2}}  \right)}{\prod_{j=1}^{m}(x+x^{-1}-q^{j}-q^{-j})}\right]\right)~,</span>)</p>
+<p>latex exited with error
+[stdout]
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2024-11-01&gt; patch level 2
+L3 programming layer &lt;2025-01-18&gt;
+(/usr/share/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2024/06/29 v1.4n Standard LaTeX document class
+(/usr/share/texmf-dist/tex/latex/base/size12.clo))
+(/usr/share/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/share/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/share/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/share/texmf-dist/tex/latex/anyfontsize/anyfontsize.sty)
+(/usr/share/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/share/texmf-dist/tex/latex/l3backend/l3backend-dvips.def) (./math.aux)
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd)
+! Undefined control sequence.
+&lt;argument&gt; ...split}\hat {Z}_{b}(S_{+2}^{3}(\knot 
+                                                  );W_{1};\tau )\sim \\\left...
+l.15 ...-q^{j}-q^{-j})}\right]\right)~,\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...1};\tau )\sim \\\left (a_{-1}(\knot 
+                                                  ;q)\mathcal {L}_{+2}^{(b+1...
+l.15 ...-q^{j}-q^{-j})}\right]\right)~,\end{split}
+                                                  
+
+Package amsmath Warning: Foreign command \over;
+(amsmath)                \frac or \genfrac should be used instead
+(amsmath)                 on input line 15.
+
+! Undefined control sequence.
+&lt;argument&gt; ...sum _{m=1}^{\infty } a_{-m-1}(\knot 
+                                                  ;q)\mathcal {L}_{+2}^{(b+1...
+l.15 ...-q^{j}-q^{-j})}\right]\right)~,\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...split}\hat {Z}_{b}(S_{+2}^{3}(\knot 
+                                                  );W_{1};\tau )\sim \\\left...
+l.15 ...-q^{j}-q^{-j})}\right]\right)~,\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...1};\tau )\sim \\\left (a_{-1}(\knot 
+                                                  ;q)\mathcal {L}_{+2}^{(b+1...
+l.15 ...-q^{j}-q^{-j})}\right]\right)~,\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...sum _{m=1}^{\infty } a_{-m-1}(\knot 
+                                                  ;q)\mathcal {L}_{+2}^{(b+1...
+l.15 ...-q^{j}-q^{-j})}\right]\right)~,\end{split}
+                                                  
+
+Overfull \hbox (36.3224pt too wide) detected at line 16
+[]
+
+[1] (./math.aux) )
+(see the transcript file for additional information)
+Output written on math.dvi (1 page, 1380 bytes).
+Transcript written on math.log.
+</p>
+</aside>
+<p>which we expand using equation (2.27)</p>
+<div class="math">
+<p><img src="../_images/math/82a68482a529aac981f21d74f13479b21b7426c2.png" alt="\mathcal{L}_{+ p}^{(b)}\left[\frac{x^{1/2}+x^{-1/2} }{\prod_{j=1}^{n}(x+x^{-1}-q^{j}-q^{-j})}\right]  =(-1)^n \frac{q^{\frac{n^2+n}{2}-\frac{1}{4}}}{(q^{n};q)_n} q^{\frac{b(2p-b)}{4p}}\tilde P_{n}^{p,b}(q) ~, \qquad p\in\mathbb{Z}_{+}~."/></p>
+</div><p>leading to</p>
+<aside class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<span class="docutils literal">\hat{Z}_{b}(S_{+2}^{3}(\knot);W_{1};\tau)\sim q^{\frac{b(4-b)-2}{8}}\left(2a_{-1}(\knot;q)\tilde P_{0}^{2,b+1}(q) +
+\sum_{m=1}^{\infty} a_{-m-1}(\knot;q)(-1)^m \frac{q^{\frac{m^2+m}{2}}}{(q^{m};q)_m} \tilde P_{m}^{2,b+1}(q)\right)</span>)</p>
+<p>latex exited with error
+[stdout]
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2024-11-01&gt; patch level 2
+L3 programming layer &lt;2025-01-18&gt;
+(/usr/share/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2024/06/29 v1.4n Standard LaTeX document class
+(/usr/share/texmf-dist/tex/latex/base/size12.clo))
+(/usr/share/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/share/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/share/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/share/texmf-dist/tex/latex/anyfontsize/anyfontsize.sty)
+(/usr/share/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/share/texmf-dist/tex/latex/l3backend/l3backend-dvips.def) (./math.aux)
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd)
+! Undefined control sequence.
+&lt;argument&gt; ...split}\hat {Z}_{b}(S_{+2}^{3}(\knot 
+                                                  );W_{1};\tau )\sim q^{\fra...
+l.15 ... \tilde P_{m}^{2,b+1}(q)\right)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ... {b(4-b)-2}{8}}\left (2a_{-1}(\knot 
+                                                  ;q)\tilde P_{0}^{2,b+1}(q)...
+l.15 ... \tilde P_{m}^{2,b+1}(q)\right)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...sum _{m=1}^{\infty } a_{-m-1}(\knot 
+                                                  ;q)(-1)^m \frac {q^{\frac ...
+l.15 ... \tilde P_{m}^{2,b+1}(q)\right)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...split}\hat {Z}_{b}(S_{+2}^{3}(\knot 
+                                                  );W_{1};\tau )\sim q^{\fra...
+l.15 ... \tilde P_{m}^{2,b+1}(q)\right)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ... {b(4-b)-2}{8}}\left (2a_{-1}(\knot 
+                                                  ;q)\tilde P_{0}^{2,b+1}(q)...
+l.15 ... \tilde P_{m}^{2,b+1}(q)\right)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...sum _{m=1}^{\infty } a_{-m-1}(\knot 
+                                                  ;q)(-1)^m \frac {q^{\frac ...
+l.15 ... \tilde P_{m}^{2,b+1}(q)\right)\end{split}
+                                                  
+
+Overfull \hbox (66.30928pt too wide) detected at line 16
+[]
+
+[1] (./math.aux) )
+(see the transcript file for additional information)
+Output written on math.dvi (1 page, 1224 bytes).
+Transcript written on math.log.
+</p>
+</aside>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">zhat_surg</span> <span class="o">=</span> <span class="n">habiro_3l</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">P_poly</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">b</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">):</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">P_poly</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">b</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">P</span> <span class="ow">in</span> <span class="n">ZZ</span><span class="p">:</span>
+        <span class="n">P</span> <span class="o">=</span> <span class="n">P</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">q</span><span class="p">)</span>
+    <span class="n">zhat_surg</span> <span class="o">+=</span> <span class="n">habiro_3l</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="p">)</span><span class="o">/</span><span class="n">q_pochhammer</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="p">))</span><span class="o">*</span><span class="n">P</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Z_0(nu=1): &quot;</span><span class="p">,</span><span class="n">q</span><span class="o">^</span><span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="p">(</span><span class="mi">4</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="n">q</span><span class="o">*</span><span class="n">zhat_surg</span><span class="p">)</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="mi">20</span><span class="p">))</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">zhat_surg</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">):</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">P_poly</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">b</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">P</span> <span class="ow">in</span> <span class="n">ZZ</span><span class="p">:</span>
+        <span class="n">P</span> <span class="o">=</span> <span class="n">P</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">q</span><span class="p">)</span>
+    <span class="n">zhat_surg</span> <span class="o">+=</span> <span class="n">habiro_3l</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="p">)</span><span class="o">/</span><span class="n">q_pochhammer</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="p">))</span><span class="o">*</span><span class="n">P</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Z_1(nu=1): &quot;</span><span class="p">,</span><span class="n">q</span><span class="o">^</span><span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="p">(</span><span class="mi">4</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">zhat_surg</span><span class="p">)</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="mi">20</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Z_0(nu=1):  1 + 1*q + 1*q^2 + 1*q^3 + 2*q^4 + 2*q^5 + 2*q^6 + 3*q^7 + 3*q^8 + 4*q^9 + 5*q^10 + 5*q^11 + 6*q^12 + 7*q^13 + 8*q^14 + 9*q^15 + 11*q^16 + 12*q^17 + 13*q^18 + 16*q^19 + Order(q^20)
+Z_1(nu=1):  q^(3/8)*((-1) + (-1)*q + (-1)*q^2 + (-2)*q^3 + (-2)*q^4 + (-2)*q^5 + (-3)*q^6 + (-3)*q^7 + (-4)*q^8 + (-5)*q^9 + (-5)*q^10 + (-5)*q^11 + (-8)*q^12 + (-8)*q^13 + (-8)*q^14 + (-11)*q^15 + (-12)*q^16 + (-13)*q^17 + (-15)*q^18 + (-16)*q^19 + Order(q^20))
+</pre></div></div>
+</div>
+<div class="math">
+<p><img src="../_images/math/a067ff6c8f71ceb6e4bee69542e6536cdaabb1c3.png" alt="\def\knot{\mathbb{3}_1^l}"/></p>
+</div><p>In the <img class="math" src="../_images/math/9f73abb0cb592c88a0d0f8e36d1fa8e7470a65d2.png" alt="\nu=2"/> case, following equation (2.22) of [1] we have</p>
+<aside class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<span class="docutils literal">\hat{Z}_{b}\left(S_{+2}^{3}(\knot); W_{2}; \tau\right) \sim \\\left( a_{-1}(\knot;q)\, \mathcal{L}_{+2}^{(b+2)}\left[ x + 1 + x^{-1} \right] + \sum_{m=1}^{\infty} \mathcal{L}_{+2}^{(b+2)}\left[ \left( x + 1 + x^{-1} \right)
+\frac{a_{-m-1}(\knot;q)}{\prod_{j=1}^{m} (x + x^{-1} - q^{j} - q^{-j})} \right] \right).</span>)</p>
+<p>latex exited with error
+[stdout]
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2024-11-01&gt; patch level 2
+L3 programming layer &lt;2025-01-18&gt;
+(/usr/share/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2024/06/29 v1.4n Standard LaTeX document class
+(/usr/share/texmf-dist/tex/latex/base/size12.clo))
+(/usr/share/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/share/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/share/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/share/texmf-dist/tex/latex/anyfontsize/anyfontsize.sty)
+(/usr/share/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/share/texmf-dist/tex/latex/l3backend/l3backend-dvips.def) (./math.aux)
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd)
+! Undefined control sequence.
+&lt;argument&gt; ...\hat {Z}_{b}\left (S_{+2}^{3}(\knot 
+                                                  ); W_{2}; \tau \right ) \s...
+l.15 ...{j} - q^{-j})} \right] \right).\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...right ) \sim \\\left ( a_{-1}(\knot 
+                                                  ;q)\, \mathcal {L}_{+2}^{(...
+l.15 ...{j} - q^{-j})} \right] \right).\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; a_{-m-1}(\knot 
+                          ;q)
+l.15 ...{j} - q^{-j})} \right] \right).\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...\hat {Z}_{b}\left (S_{+2}^{3}(\knot 
+                                                  ); W_{2}; \tau \right ) \s...
+l.15 ...{j} - q^{-j})} \right] \right).\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...right ) \sim \\\left ( a_{-1}(\knot 
+                                                  ;q)\, \mathcal {L}_{+2}^{(...
+l.15 ...{j} - q^{-j})} \right] \right).\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; a_{-m-1}(\knot 
+                          ;q)
+l.15 ...{j} - q^{-j})} \right] \right).\end{split}
+                                                  
+
+Overfull \hbox (61.86874pt too wide) detected at line 16
+[]
+
+[1] (./math.aux) )
+(see the transcript file for additional information)
+Output written on math.dvi (1 page, 1160 bytes).
+Transcript written on math.log.
+</p>
+</aside>
+<p>Following (2.33)</p>
+<div class="math">
+<p><img src="../_images/math/9179d74f470e82e819bfbfeeb4b9042930fc4a01.png" alt="\frac{(x+x^{-1})^m}{\prod_{j=1}^{n} (x + x^{-1} - q^{j} - q^{-j})} = \frac{(q^{n}+q^{-n})(x+x^{-1})^{m-1}}{\prod_{j=1}^{n} (x + x^{-1} - q^{j} - q^{-j})} + \frac{(x+x^{-1})^{m-1}}{\prod_{j=1}^{n-1} (x + x^{-1} - q^{j} - q^{-j})},"/></p>
+</div><p>we can expand the invariant as</p>
+<div class="math">
+<p><img src="../_images/math/a067ff6c8f71ceb6e4bee69542e6536cdaabb1c3.png" alt="\def\knot{\mathbb{3}_1^l}"/></p>
+</div><p>$$ <span class="math">\hat{Z}</span><em>{b}:nbsphinx-math:`left`(S</em>{+2}^{3}(<span class="math">\knot</span>); W_{2}; <span class="math">\tau</span><span class="math">\right</span>) <span class="math">\sim  `a\_{-1}(:nbsphinx-math:</span>knot`;q), <span class="math">\mathcal{L}</span><em>{+2}^{(b+2)}:nbsphinx-math:`left[ x + 1 + x^{-1} right] `\+ :nbsphinx-math:`sum`</em>{m=1}^{<span class="math">\infty</span>} a_{-m-1}(<span class="math">\knot</span>;q):nbsphinx-math:<cite>mathcal{L}</cite><em>{+2}^{(b+2)}
+:nbsphinx-math:`left[left(frac{ q^m + 1 + q^{-m}}{prod_{j=1}^{m} (x + x^{-1} - q^{j} - q^{-j})}+frac{1}{prod_{j=1}^{m-1} (x + x^{-1} - q^{j} - q^{-j})}right)right]`\ :nbsphinx-math:`sim  `a</em>{-1}(<span class="math">\knot</span>;q), <span class="math">\mathcal{L}</span><em>{+2}{(b+2)}:nbsphinx-math:`left[ x + 1 +  x^{-1} right] `+a_{-2}(:nbsphinx-math:`knot`;q):nbsphinx-math:`mathcal{L}`{+2}^{(b+2)}:nbsphinx-math:`left[1right] `+ \ +
+:nbsphinx-math:`sum`{m=1}{:nbsphinx-math:`infty`}:nbsphinx-math:`Bigg`( a</em>{-m-1}(<span class="math">\knot</span>;q):nbsphinx-math:<cite>left`(q^m + 1 + q^{-m}:nbsphinx-math:</cite>right`)+a_{-m-2}(<span class="math">\knot</span>;q):nbsphinx-math:<cite>Bigg</cite>):nbsphinx-math:<cite>mathcal{L}</cite>_{+2}^{(b+2)} <span class="math">\left[\left(\frac{1}{\prod_{j=1}^{m} (x + x^{-1} - q^{j} - q^{-j})}\right)\right]</span>\</p>
+<p>$$</p>
+<p>which, using (2.20) reduces to</p>
+<aside class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<span class="docutils literal">\hat{Z}_{b}\left(S_{+2}^{3}(\knot); W_{2}; \tau\right)
+ \sim \\   q^{-\frac{(b-2)^2}{8}}\Bigg(P^{2,b+2}_0(q)\delta_{b,0}\left(a_{-1}(\knot;q)+a_{-2}(\knot;q)\right)
+ \\
+\sum_{m=1}^{\infty}P^{2,b+2}_n(q)\bigg( a_{-m-1}(\knot;q)\left(q^m + 1 + q^{-m}\right)+a_{-m-2}(\knot;q)\bigg)\frac{(-1)^m q^{\frac{m(m+1)}{2}}}{(q^{m+1};q)_m} \Bigg)</span>)</p>
+<p>latex exited with error
+[stdout]
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2024-11-01&gt; patch level 2
+L3 programming layer &lt;2025-01-18&gt;
+(/usr/share/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2024/06/29 v1.4n Standard LaTeX document class
+(/usr/share/texmf-dist/tex/latex/base/size12.clo))
+(/usr/share/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/share/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/share/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/share/texmf-dist/tex/latex/anyfontsize/anyfontsize.sty)
+(/usr/share/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/share/texmf-dist/tex/latex/l3backend/l3backend-dvips.def) (./math.aux)
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd)
+! Undefined control sequence.
+&lt;argument&gt; ...\hat {Z}_{b}\left (S_{+2}^{3}(\knot 
+                                                  ); W_{2}; \tau \right ) \s...
+l.17 ...+1)}{2}}}{(q^{m+1};q)_m} \Bigg)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...(q)\delta _{b,0}\left (a_{-1}(\knot 
+                                                  ;q)+a_{-2}(\knot ;q)\right...
+l.17 ...+1)}{2}}}{(q^{m+1};q)_m} \Bigg)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...left (a_{-1}(\knot ;q)+a_{-2}(\knot 
+                                                  ;q)\right ) \\ \sum _{m=1}...
+l.17 ...+1)}{2}}}{(q^{m+1};q)_m} \Bigg)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...^{2,b+2}_n(q)\bigg ( a_{-m-1}(\knot 
+                                                  ;q)\left (q^m + 1 + q^{-m}...
+l.17 ...+1)}{2}}}{(q^{m+1};q)_m} \Bigg)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...+ 1 + q^{-m}\right )+a_{-m-2}(\knot 
+                                                  ;q)\bigg )\frac {(-1)^m q^...
+l.17 ...+1)}{2}}}{(q^{m+1};q)_m} \Bigg)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...\hat {Z}_{b}\left (S_{+2}^{3}(\knot 
+                                                  ); W_{2}; \tau \right ) \s...
+l.17 ...+1)}{2}}}{(q^{m+1};q)_m} \Bigg)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...(q)\delta _{b,0}\left (a_{-1}(\knot 
+                                                  ;q)+a_{-2}(\knot ;q)\right...
+l.17 ...+1)}{2}}}{(q^{m+1};q)_m} \Bigg)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...left (a_{-1}(\knot ;q)+a_{-2}(\knot 
+                                                  ;q)\right ) \\ \sum _{m=1}...
+l.17 ...+1)}{2}}}{(q^{m+1};q)_m} \Bigg)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...^{2,b+2}_n(q)\bigg ( a_{-m-1}(\knot 
+                                                  ;q)\left (q^m + 1 + q^{-m}...
+l.17 ...+1)}{2}}}{(q^{m+1};q)_m} \Bigg)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...+ 1 + q^{-m}\right )+a_{-m-2}(\knot 
+                                                  ;q)\bigg )\frac {(-1)^m q^...
+l.17 ...+1)}{2}}}{(q^{m+1};q)_m} \Bigg)\end{split}
+                                                  
+
+[1] (./math.aux) )
+(see the transcript file for additional information)
+Output written on math.dvi (1 page, 1456 bytes).
+Transcript written on math.log.
+</p>
+</aside>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">zhat_surg</span> <span class="o">=</span> <span class="p">(</span><span class="n">habiro_3l</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">habiro_3l</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">))</span> <span class="o">*</span> <span class="n">P_poly</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">b</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># *2</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">):</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">P_poly</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">b</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">P</span> <span class="ow">in</span> <span class="n">ZZ</span><span class="p">:</span>
+        <span class="n">P</span> <span class="o">=</span> <span class="n">P</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">q</span><span class="p">)</span>
+    <span class="n">zhat_surg</span> <span class="o">+=</span> <span class="n">habiro_3l</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">q_pochhammer</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="n">P</span><span class="o">*</span><span class="p">(</span><span class="n">q</span><span class="o">**</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="o">+</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="p">))</span>
+    <span class="n">zhat_surg</span> <span class="o">+=</span> <span class="n">habiro_3l</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">q_pochhammer</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="n">P</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Z_0(nu=2): &quot;</span><span class="p">,</span><span class="n">q</span><span class="o">^</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">8</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="n">q</span><span class="o">*</span><span class="n">zhat_surg</span><span class="p">)</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="mi">20</span><span class="p">))</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">zhat_surg</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">):</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">P_poly</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">b</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">P</span> <span class="ow">in</span> <span class="n">ZZ</span><span class="p">:</span>
+        <span class="n">P</span> <span class="o">=</span> <span class="n">P</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">q</span><span class="p">)</span>
+    <span class="n">zhat_surg</span> <span class="o">+=</span> <span class="n">habiro_3l</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">q_pochhammer</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="n">P</span><span class="o">*</span><span class="p">(</span><span class="n">q</span><span class="o">**</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="o">+</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="p">))</span>
+    <span class="n">zhat_surg</span> <span class="o">+=</span> <span class="n">habiro_3l</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">q_pochhammer</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="n">P</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Z_1(nu=2): &quot;</span><span class="p">,</span><span class="n">q</span><span class="o">^</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">8</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="n">q</span><span class="o">*</span><span class="n">zhat_surg</span><span class="p">)</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="mi">20</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Z_0(nu=2):  (1 + 1*q + 2*q^2 + 2*q^3 + 2*q^4 + 3*q^5 + 4*q^6 + 4*q^7 + 5*q^8 + 5*q^9 + 7*q^10 + 8*q^11 + 9*q^12 + 10*q^13 + 12*q^14 + 13*q^15 + 15*q^16 + 17*q^17 + 20*q^18 + 22*q^19 + Order(q^20))/sqrt(q)
+Z_1(nu=2):  (1 + 1*q + 2*q^2 + 1*q^3 + 3*q^4 + 2*q^5 + 4*q^6 + 3*q^7 + 5*q^8 + 5*q^9 + 7*q^10 + 6*q^11 + 9*q^12 + 9*q^13 + 12*q^14 + 11*q^15 + 16*q^16 + 15*q^17 + 19*q^18 + 19*q^19 + Order(q^20))/q^(1/8)
+</pre></div></div>
+</div>
+<div class="math">
+<p><img src="../_images/math/a067ff6c8f71ceb6e4bee69542e6536cdaabb1c3.png" alt="\def\knot{\mathbb{3}_1^l}"/></p>
+</div><p>In the <img class="math" src="../_images/math/aa6587cde64e7d8dcce6d22fd178002c46d5f788.png" alt="\nu=3"/> case, following equation (2.22) of [1] we have</p>
+<aside class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<span class="docutils literal">\hat{Z}_{b}\left(S_{+2}^{3}(\knot); W_{3}; \tau\right) \sim \Bigg( a_{-1}(\knot;q)\, \mathcal{L}_{+2}^{(b+3)}\left[ x^{\frac{3}{2}} + x^{\frac{1}{2}} + x^{-\frac{1}{2}} + x^{-\frac{3}{2}}\right] + \\
+\sum_{m=1}^{\infty}a_{-m-1}(\knot;q) \mathcal{L}_{+2}^{(b+3)}\left[
+\frac{ x^{\frac{3}{2}} + x^{\frac{1}{2}} + x^{-\frac{1}{2}} + x^{-\frac{3}{2}} }{\prod_{j=1}^{m} (x + x^{-1} - q^{j} - q^{-j})} \right] \Bigg)\\
+=\Bigg( a_{-1}(\knot;q)\, \mathcal{L}_{+2}^{(b+3)}\left[ (x + x^{-1})(x^{\frac{1}{2}}+x^{-\frac{1}{2}})\right] + \\
+\sum_{m=1}^{\infty} a_{-m-1}(\knot;q)\mathcal{L}_{+2}^{(b+3)}\left[ \frac{(x + x^{-1})(x^{\frac{1}{2}}+x^{-\frac{1}{2}})}{\prod_{j=1}^{m} (x + x^{-1} - q^{j} - q^{-j})} \right] \Bigg)</span>)</p>
+<p>latex exited with error
+[stdout]
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2024-11-01&gt; patch level 2
+L3 programming layer &lt;2025-01-18&gt;
+(/usr/share/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2024/06/29 v1.4n Standard LaTeX document class
+(/usr/share/texmf-dist/tex/latex/base/size12.clo))
+(/usr/share/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/share/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/share/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/share/texmf-dist/tex/latex/anyfontsize/anyfontsize.sty)
+(/usr/share/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/share/texmf-dist/tex/latex/l3backend/l3backend-dvips.def) (./math.aux)
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd)
+! Undefined control sequence.
+&lt;argument&gt; ...\hat {Z}_{b}\left (S_{+2}^{3}(\knot 
+                                                  ); W_{3}; \tau \right ) \s...
+l.18 ...q^{j} - q^{-j})} \right] \Bigg)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ... \right ) \sim \Bigg ( a_{-1}(\knot 
+                                                  ;q)\, \mathcal {L}_{+2}^{(...
+l.18 ...q^{j} - q^{-j})} \right] \Bigg)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...\sum _{m=1}^{\infty }a_{-m-1}(\knot 
+                                                  ;q) \mathcal {L}_{+2}^{(b+...
+l.18 ...q^{j} - q^{-j})} \right] \Bigg)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...t ] \Bigg )\\ =\Bigg ( a_{-1}(\knot 
+                                                  ;q)\, \mathcal {L}_{+2}^{(...
+l.18 ...q^{j} - q^{-j})} \right] \Bigg)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...sum _{m=1}^{\infty } a_{-m-1}(\knot 
+                                                  ;q)\mathcal {L}_{+2}^{(b+3...
+l.18 ...q^{j} - q^{-j})} \right] \Bigg)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...\hat {Z}_{b}\left (S_{+2}^{3}(\knot 
+                                                  ); W_{3}; \tau \right ) \s...
+l.18 ...q^{j} - q^{-j})} \right] \Bigg)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ... \right ) \sim \Bigg ( a_{-1}(\knot 
+                                                  ;q)\, \mathcal {L}_{+2}^{(...
+l.18 ...q^{j} - q^{-j})} \right] \Bigg)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...\sum _{m=1}^{\infty }a_{-m-1}(\knot 
+                                                  ;q) \mathcal {L}_{+2}^{(b+...
+l.18 ...q^{j} - q^{-j})} \right] \Bigg)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...t ] \Bigg )\\ =\Bigg ( a_{-1}(\knot 
+                                                  ;q)\, \mathcal {L}_{+2}^{(...
+l.18 ...q^{j} - q^{-j})} \right] \Bigg)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...sum _{m=1}^{\infty } a_{-m-1}(\knot 
+                                                  ;q)\mathcal {L}_{+2}^{(b+3...
+l.18 ...q^{j} - q^{-j})} \right] \Bigg)\end{split}
+                                                  
+
+[1] (./math.aux) )
+(see the transcript file for additional information)
+Output written on math.dvi (1 page, 2248 bytes).
+Transcript written on math.log.
+</p>
+</aside>
+<p>Following (2.33), in the same way as the <img class="math" src="../_images/math/9f73abb0cb592c88a0d0f8e36d1fa8e7470a65d2.png" alt="\nu=2"/> case, this lands us with</p>
+<aside class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<span class="docutils literal">\hat{Z}_{b}\left(S_{+2}^{3}(\knot); W_{3}; \tau\right)
+ \sim \\
+ q^{-\frac{-(b-1)(b+3)^2}{8}}\Bigg(P^{2,b+3}_0(q)\delta_{b,0}\left(a_{-1}(\knot;q)+a_{-2}(\knot;q)\right)+2P^{2,b+2}_0(q)\delta_{b,1}q^{-1}a_{-1}(\knot;q)+
+ \\
+\sum_{m=1}^{\infty}P^{2,b+2}_n(q)\bigg( a_{-m-1}(\knot;q)\left(q^m + 1 + q^{-m}\right)+a_{-m-2}(\knot;q)\bigg)\frac{(-1)^m q^{\frac{m(m+1)}{2}}}{(q^{m+1};q)_m} \Bigg)</span>)</p>
+<p>latex exited with error
+[stdout]
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2024-11-01&gt; patch level 2
+L3 programming layer &lt;2025-01-18&gt;
+(/usr/share/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2024/06/29 v1.4n Standard LaTeX document class
+(/usr/share/texmf-dist/tex/latex/base/size12.clo))
+(/usr/share/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/share/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/share/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/share/texmf-dist/tex/latex/anyfontsize/anyfontsize.sty)
+(/usr/share/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/share/texmf-dist/tex/latex/l3backend/l3backend-dvips.def) (./math.aux)
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd)
+! Undefined control sequence.
+&lt;argument&gt; ...\hat {Z}_{b}\left (S_{+2}^{3}(\knot 
+                                                  ); W_{3}; \tau \right ) \s...
+l.18 ...+1)}{2}}}{(q^{m+1};q)_m} \Bigg)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...(q)\delta _{b,0}\left (a_{-1}(\knot 
+                                                  ;q)+a_{-2}(\knot ;q)\right...
+l.18 ...+1)}{2}}}{(q^{m+1};q)_m} \Bigg)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...left (a_{-1}(\knot ;q)+a_{-2}(\knot 
+                                                  ;q)\right )+2P^{2,b+2}_0(q...
+l.18 ...+1)}{2}}}{(q^{m+1};q)_m} \Bigg)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...0(q)\delta _{b,1}q^{-1}a_{-1}(\knot 
+                                                  ;q)+ \\ \sum _{m=1}^{\inft...
+l.18 ...+1)}{2}}}{(q^{m+1};q)_m} \Bigg)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...^{2,b+2}_n(q)\bigg ( a_{-m-1}(\knot 
+                                                  ;q)\left (q^m + 1 + q^{-m}...
+l.18 ...+1)}{2}}}{(q^{m+1};q)_m} \Bigg)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...+ 1 + q^{-m}\right )+a_{-m-2}(\knot 
+                                                  ;q)\bigg )\frac {(-1)^m q^...
+l.18 ...+1)}{2}}}{(q^{m+1};q)_m} \Bigg)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...\hat {Z}_{b}\left (S_{+2}^{3}(\knot 
+                                                  ); W_{3}; \tau \right ) \s...
+l.18 ...+1)}{2}}}{(q^{m+1};q)_m} \Bigg)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...(q)\delta _{b,0}\left (a_{-1}(\knot 
+                                                  ;q)+a_{-2}(\knot ;q)\right...
+l.18 ...+1)}{2}}}{(q^{m+1};q)_m} \Bigg)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...left (a_{-1}(\knot ;q)+a_{-2}(\knot 
+                                                  ;q)\right )+2P^{2,b+2}_0(q...
+l.18 ...+1)}{2}}}{(q^{m+1};q)_m} \Bigg)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...0(q)\delta _{b,1}q^{-1}a_{-1}(\knot 
+                                                  ;q)+ \\ \sum _{m=1}^{\inft...
+l.18 ...+1)}{2}}}{(q^{m+1};q)_m} \Bigg)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...^{2,b+2}_n(q)\bigg ( a_{-m-1}(\knot 
+                                                  ;q)\left (q^m + 1 + q^{-m}...
+l.18 ...+1)}{2}}}{(q^{m+1};q)_m} \Bigg)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; ...+ 1 + q^{-m}\right )+a_{-m-2}(\knot 
+                                                  ;q)\bigg )\frac {(-1)^m q^...
+l.18 ...+1)}{2}}}{(q^{m+1};q)_m} \Bigg)\end{split}
+                                                  
+
+[1] (./math.aux) )
+(see the transcript file for additional information)
+Output written on math.dvi (1 page, 1572 bytes).
+Transcript written on math.log.
+</p>
+</aside>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">zhat_surg</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">):</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">P_poly</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">b</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">P</span> <span class="ow">in</span> <span class="n">ZZ</span><span class="p">:</span>
+        <span class="n">P</span> <span class="o">=</span> <span class="n">P</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">q</span><span class="p">)</span>
+    <span class="n">zhat_surg</span> <span class="o">+=</span> <span class="n">habiro_3l</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">q_pochhammer</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="p">))</span><span class="o">*</span><span class="n">P</span><span class="o">*</span><span class="p">(</span><span class="n">q</span><span class="o">**</span><span class="n">n</span><span class="o">+</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="p">))</span>
+    <span class="n">zhat_surg</span> <span class="o">+=</span> <span class="n">habiro_3l</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">q_pochhammer</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">q</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="p">))</span><span class="o">*</span><span class="n">P</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Z_0(nu=3): &quot;</span><span class="p">,</span><span class="n">q</span><span class="o">^</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">b</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="n">q</span><span class="o">*</span><span class="n">zhat_surg</span><span class="p">)</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="mi">20</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Z_0(nu=3):  q^(3/8)*(1 + 1*q + 2*q^2 + 2*q^3 + 2*q^4 + 3*q^5 + 4*q^6 + 4*q^7 + 5*q^8 + 6*q^9 + 6*q^10 + 8*q^11 + 10*q^12 + 10*q^13 + 12*q^14 + 14*q^15 + 15*q^16 + 18*q^17 + 20*q^18 + 22*q^19 + Order(q^20))
+</pre></div></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, M. Cheng, I. Coman, P. Kucharski, D. Passaro, G. Sgroi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

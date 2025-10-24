@@ -1,0 +1,7 @@
+========================
+Theorems and Conjectures
+========================
+  
+This page is incomplete. I am debating with myself whether this page should exist at all. The point of this page is to collect theorems, lemmas and conjectures that we indend to demonstrate in the jupyter notebook for easy access.
+
+
