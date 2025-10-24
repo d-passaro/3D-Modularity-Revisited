@@ -15,7 +15,7 @@ Key components:
 - Indefinite theta functions
 - Ramanujan's order 7 mock theta functions
 
-Mathematical background: These functions implement results from algebraic number theory and modular forms, particularly focused on Weil representations of quadratic forms and their applications to mock theta functions.
+These functions implement results from number theory and modular forms, particularly focused on Weil representations of quadratic forms and their applications to mock theta functions.
 
 Weil Representation Functions
 -----------------------------
